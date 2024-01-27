@@ -47,7 +47,13 @@ userSchema.pre('save',async function(next){
 userSchema.methods.comparePassword = async(candidatepassword,password)=>{
     return await bycrypt.compare(candidatepassword,password)
 }
-
+userSchema.methods.changepassword=function(jwttime){
+    if(this.passwordChangeAt){
+        const changeAt =  parseInt(this.passwordChangeAt.getTIme()/1000,10)
+        return jwt<changeAt
+    }
+    return false;
+}
 const User = mongoose.model('User',userSchema)
 
 module.exports = User

@@ -14,16 +14,14 @@ const createSignInToken = (id) =>{
     return token
 }
 //cookie
-const createsignIn = (user,statuscode,res)=>{
-    console.log("hello")
+const createsignIn =async (user,statuscode,res)=>{
     const token = createSignInToken(user._id)
     //cookie option'
-    const cookieoption = {
-        expires:new Date(Date.now()+process.env.cookie_expires*24*60*60*1000),
+        const cookieOption = {
+        expires:new Date(Date.now()+process.env.cookie_expires* 24 * 60 *60*1000),
         httpOnly:true
-    }
-    res.cookie("jwt",token,cookieoption)
-    res.status(statuscode).json({
+     } 
+    res.status(statuscode).cookie("jwt",token,cookieOption).json({
         status:'success',
         token,
         user
@@ -67,6 +65,43 @@ const userLogin = async(req,res,next)=>{
     }
 }
 const verifyUser = async(req,res,next)=>{
+    try{
+        let token;
+        if(req.headers.authorization || req.headers.authorization.startsWith('Bearer')){
+            token = req.headers.authorization.split(' ')[1];
+        }else if(req.cookie.jwt){
+            token = req.cookie.jwt
+        }
+        if(!token){
+            throw new Error('no token available')
+        }
+        //find user
+        const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
+        if(!decoded){
+            throw new Error('Invalid Token')
+        }
+        const user =await User.findById(decoded.id);
+        if(!user){
+            throw new AppError("can't find user")
+        }
+        //password changeAt
+        const isChange = user.changepassword(decoded.iap)
+        if(isChange){
+            throw new Error('password changed')
+        }
+
+        res.status(200).json({
+            status:'success',
+            data:user
+        })
+    }catch(err){
+        res.status(404).json({
+            status:'fail',
+            message:err
+        })
+    }
+}
+const protected = async(req,res,next)=>{
    try{
     //get token
     let token;
@@ -92,7 +127,7 @@ const verifyUser = async(req,res,next)=>{
         if(isChange){
             throw new Error('password changed')
         }
-        res.user = user
+        req.user = user
        next()
    }catch(err){
         res.status(500).json({

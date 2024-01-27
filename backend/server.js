@@ -3,8 +3,11 @@ const App = express()
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const User = require('./Routes/userRoute')
-
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
 App.use(express.json({max:'10kb'}))
+App.use(cors())
+App.use(cookieParser())
 //start
 dotenv.config({path:'./config.env'})
 //database connection

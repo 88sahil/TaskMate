@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Logo from "./Logo/Logo";
+import {useNavigate} from 'react-router-dom'
 import './Components.css'
 const SignUp = () =>{
+    const navigate = useNavigate()
     const api = axios.create({
         withCredentials:true
     })
@@ -13,7 +15,7 @@ const SignUp = () =>{
     const RegisterUser =(data)=>{
         const url = "http://localhost:3000/api/user/signup"
         api.post(url,data).then((res)=>{
-            console.log(res)
+            navigate('/')
         }).catch((err)=>{
             seterror(err.response.data.msg)
         })
@@ -28,7 +30,9 @@ const SignUp = () =>{
             </div>
             <div className="sub-div2">
                     <a>Already have account?</a>
-                    <button>Go TO Login</button>
+                    <button onClick={()=>{
+                        navigate('/login')
+                    }}>Go TO Login</button>
             </div>
         </div>
          <form onSubmit={handleSubmit(RegisterUser)} className="signup-form">

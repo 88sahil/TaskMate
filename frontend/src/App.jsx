@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import SignUp from './components/signup'
 import Login from './components/Login'
+import LoginPage from './pages/LoginPage/LoginPage'
 function App() {
   const [message,setmessage] = useState('')
   const [user,setuser] = useState({})
@@ -22,15 +23,6 @@ function App() {
   },[])
   return (
     <>
-    <div>
-    <Login/>
-
-    </div>
-    <div>
-        <img src={user.photo} alt="no photo" />
-        <a href="">{user.name}</a>
-      </div>
-      <a>{message}</a>
     </>
   )
 }

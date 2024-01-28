@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Logo from "./Logo/Logo";
 import google from '../assets/image/google.png'
+import {useNavigate,Link} from 'react-router-dom'
 const Login = () =>{
+    const navigate = useNavigate()
     const [message,setmessage] = useState('')
     const {handleSubmit,register} = useForm()
     const LoginUser = async(data)=>{
@@ -13,6 +15,9 @@ const Login = () =>{
         })
         const url = 'http://localhost:3000/api/user/login'
         const user = await api.post(url,data)
+        if(user){
+            navigate('/')
+        }
     }
     const googleLogin=()=>{
         window.open("http://localhost:3000/auth/google/callback","_self")
@@ -26,7 +31,9 @@ const Login = () =>{
             </div>
             <div className="sub-div2">
                     <a>new User?</a>
-                    <button>Go TO SignUp</button>
+                    <button onClick={()=>{
+                        navigate('/signup')
+                    }}>Go TO SignUp</button>
             </div>
         </div>
          <form onSubmit={handleSubmit(LoginUser)} className="signup-form">
@@ -44,6 +51,7 @@ const Login = () =>{
             })}/>
             </div>
             <button type="submit">Login</button>
+            <Link to="/forgotPassword"><a>Forgot Password?</a></Link>
             <p>-OR-</p>
             <div className="google">
                 <button onClick={googleLogin}><img src={google} alt="google" /><a>SIGNIN WITH GOOGLE</a></button>

@@ -35,7 +35,8 @@ const userSchema = new mongoose.Schema({
         default:true
     },
     passwordresetToken:String,
-    tokenexpries:Date
+    tokenexpries:Date,
+    googleID:String,
 })
 
 userSchema.pre('save',async function(next){

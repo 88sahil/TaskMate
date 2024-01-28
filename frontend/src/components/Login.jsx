@@ -3,7 +3,7 @@ import './Components.css'
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Logo from "./Logo/Logo";
-import google from '../'
+import google from '../assets/image/google.png'
 const Login = () =>{
     const [message,setmessage] = useState('')
     const {handleSubmit,register} = useForm()
@@ -13,6 +13,9 @@ const Login = () =>{
         })
         const url = 'http://localhost:3000/api/user/login'
         const user = await api.post(url,data)
+    }
+    const googleLogin=()=>{
+        window.open("http://localhost:3000/auth/google/callback","_self")
     }
     return(
         <div className="signuppage">
@@ -41,8 +44,9 @@ const Login = () =>{
             })}/>
             </div>
             <button type="submit">Login</button>
+            <p>-OR-</p>
             <div className="google">
-                <button>SIGNIN WITH GOOGLE</button>
+                <button onClick={googleLogin}><img src={google} alt="google" /><a>SIGNIN WITH GOOGLE</a></button>
             </div>
        </form>
         </div>

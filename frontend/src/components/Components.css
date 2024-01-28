@@ -109,3 +109,26 @@
     font-size: 12px;
     text-align: center;
 }
+.google{
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.signup-form>p{
+    text-align: center;
+}
+.google>button{
+    height: 40px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color:white;
+    background:linear-gradient(-120deg, #021B79, #0575E6, #205E9B);
+    border: none;
+}
+.google>button>img{
+    width: 20px;
+    height: 20px;
+}

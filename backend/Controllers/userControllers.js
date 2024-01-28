@@ -14,23 +14,27 @@ const createSignInToken = (id) =>{
     return token
 }
 //cookie
-const createsignIn =async (user,statuscode,res)=>{
+const createsignIn =(user,statuscode,res)=>{
     const token = createSignInToken(user._id)
-    //cookie option'
-        const cookieOption = {
-        expires:new Date(Date.now()+process.env.cookie_expires* 24 * 60 *60*1000),
+    const cookieOption = {
+        expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
         httpOnly:true
      } 
-    res.status(statuscode).cookie("jwt",token,cookieOption).json({
-        status:'success',
-        token,
-        user
-    })
+    res.cookie("jwt",token,cookieOption)
+        res.status(statuscode).json({
+            status:'success',
+            token,
+            user
+        })
+    
 }
 //signUp
 const createUser = async(req,res,next)=>{
     try{
         const user = await User.create(req.body)
+       
+        //cookie option'
+         
         createsignIn(user,201,res)
         
     }catch(err){

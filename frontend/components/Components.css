@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+.main{
+    box-shadow: 0px 0px 2px rgb(81, 81, 81);
+    display: flex;
+}
+.signuppage{
+    width: 100%;
+    min-height: 100Vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 30px;
+    
+}
+.su-div1{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+}
+.su-div1>input{
+    border: none;
+    outline: none;
+    width: 300px;
+    padding:5px 5px;
+    margin-top: 10px;
+    position: relative;
+    border-bottom: 2px solid black;
+}
+.su-div1>input::placeholder{
+    font-weight: bolder;
+}
+.su-div1>label{
+    font-weight: bolder;
+    font-family: sans-serif;
+    transition: all .2s;
+}
+.signup-form>h3{
+    font-size:18px ;
+    font-weight: bolder;
+}
+.signup-form>button{
+    padding: 15px 0;
+    background-color: #ffcb43;
+    background-image: linear-gradient(319deg, #ffcb43 0%, #ff6425 37%, #ff0016 100%);
+    border: none;
+    color: white;
+    font-size: larger;
+    border-radius: 8px;
+}
+.su-div1>a{
+    color: red;
+}
+.div1{
+    height: 423.76px;
+    border-right: .2px solid rgb(197, 194, 194);
+}
+.div1>div{
+    height: 50%;
+    width: 360px;
+}
+.sub-div1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sub-div2{
+    clip-path: polygon(60% 1%, 100% 0, 100% 43%, 100% 100%, 68% 100%, 0 100%, 0 76%, 0 19%, 24% 8%);
+    background-color: #ffcb43;
+    background-image: linear-gradient(319deg, #ffcb43 0%, #ff6425 37%, #ff0016 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.sub-div2>button{
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 5px 5px;
+    color: white;
+    margin-top: 10px;
+}
+.logodiv{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+}
+.logodiv>#logo{
+    font-size: 28px;
+    font-weight: bolder;
+    color: #ff6425;
+}
+#logo>span{
+    color: black;
+}
+.slug{
+    color: gray;
+    font-size: 12px;
+    text-align: center;
+}

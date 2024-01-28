@@ -6,7 +6,10 @@ const User = require('./Routes/userRoute')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 App.use(express.json({max:'10kb'}))
-App.use(cors())
+App.use(cors({
+    credentials:true,
+    origin:'http://localhost:8000'
+}))
 App.use(cookieParser())
 //start
 dotenv.config({path:'./config.env'})
@@ -17,13 +20,6 @@ mongoose.connect(db).then((con)=>{
 }).catch((err)=>{
     console.log(err.message)
 })
-App.get('/api/message',(req,res)=>{
-    res.status(200).json({
-        status:'success',
-        message:'sahi pakde hai bhidu have na avto aaya barobr'
-    })
-})
-
 //main routes
 App.use('/api/user',User)
 

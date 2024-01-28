@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import SignUp from './components/signup'
-import Login from './components/Login'
-import LoginPage from './pages/LoginPage/LoginPage'
 import { useNavigate } from 'react-router-dom'
 function App() {
   const [message,setmessage] = useState('')

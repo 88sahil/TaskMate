@@ -70,12 +70,9 @@ const userLogin = async(req,res,next)=>{
 }
 const verifyUser = async(req,res,next)=>{
     try{
-        let token;
-        if(req.headers.authorization || req.headers.authorization.startsWith('Bearer')){
-            token = req.headers.authorization.split(' ')[1];
-        }else if(req.cookie.jwt){
-            token = req.cookie.jwt
-        }
+       if(!req.user){
+        console.log("hello")
+        let token = req.cookies.jwt
         if(!token){
             throw new Error('no token available')
         }
@@ -98,10 +95,23 @@ const verifyUser = async(req,res,next)=>{
             status:'success',
             data:user
         })
+       }else{
+        if(req.user){
+            console.log(req.user)
+            res.status(200).json({
+                message:'success',
+                user:req.user
+            })
+        }else{
+            res.status(400).json({
+                message:'fail'
+            })
+        }
+       }
     }catch(err){
         res.status(404).json({
             status:'fail',
-            message:err
+            message:err.message
         })
     }
 }

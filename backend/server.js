@@ -9,6 +9,9 @@ const session = require('express-session')
 const passport = require('passport')
 const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const userschema = require('./Models/UserModel')
+const {promisify} = require('util')
+const jwt = require('jsonwebtoken')
+
 App.use(express.json({max:'10kb'}))
 App.use(cors({
     credentials:true,
@@ -73,19 +76,53 @@ passport.deserializeUser((user,done)=>{
 App.get('/auth/google',passport.authenticate("google",{scope:["profile","email"]}))
 App.get('/auth/google/callback',passport.authenticate('google',{
     successRedirect:'http://localhost:8000/',
-    failureRedirect:'http://localhost:8000/Login'
+    failureRedirect:'http://localhost:8000/login'
 }))
-App.get('/getuser',function(req,res){
-    if(req.user){
-        res.status(200).json({
-            message:'success',
-            user:req.user
-        })
-    }else{
-        res.status(400).json({
-            message:'fail'
-        })
-    }
+App.get('/getuser',async function(req,res){
+    try{
+        if(!req.user){
+         let token = req.cookies.jwt
+         if(!token){
+             throw new Error('no token available')
+         }
+         //find user
+         const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
+         if(!decoded){
+             throw new Error('Invalid Token')
+         }
+         const user =await userschema.findById(decoded.id);
+         if(!user){
+             throw new AppError("can't find user")
+         }
+         //password changeAt
+         const isChange = user.changepassword(decoded.iap)
+         if(isChange){
+             throw new Error('password changed')
+         }
+ 
+         res.status(200).json({
+             status:'success',
+             user:user
+         })
+        }else{
+         if(req.user){
+             console.log(req.user)
+             res.status(200).json({
+                 message:'success',
+                 user:req.user
+             })
+         }else{
+             res.status(400).json({
+                 message:'fail'
+             })
+         }
+        }
+     }catch(err){
+         res.status(404).json({
+             status:'fail',
+             message:err.message
+         })
+     }
 })
 //server
 const port = process.env.PORT || 3000

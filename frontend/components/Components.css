@@ -35,6 +35,7 @@
     margin-top: 10px;
     position: relative;
     border-bottom: 2px solid black;
+    font-weight:bolder ;
 }
 .su-div1>input::placeholder{
     font-weight: bolder;

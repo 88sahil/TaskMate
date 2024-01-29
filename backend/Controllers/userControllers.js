@@ -210,7 +210,36 @@ const protected = async(req,res,next)=>{
         })
    }
 }
-module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword}
+const changepass = async(req,res,next)=>{
+   try{
+     //get id from req.user
+     const id = req.user._id
+     //get oldpass and new pass
+     const {oldpassword,newpassword,conformnewpass} = req.body
+     //get user
+     const user = await User.findById(id).select('+password')
+     if(!user){
+        throw new Error('no user Found!')
+     }
+     const isCorrect = user.conformpassword(oldpassword,user.password)
+     if(!isCorrect){
+        throw new Error('incorrect old Password!')
+     }
+     user.password = newpassword
+     user.conformpassword = conformnewpass
+     await user.save()
+     res.status(200).json({
+        status:'sucess',
+        msg:'password changed successfully'
+     })
+   }catch(err){
+    res.status(500).json({
+        status:'fail',
+        msg:err.message
+    })
+    }
+}
+module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass}
 
 
 //login

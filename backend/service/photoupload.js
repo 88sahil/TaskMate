@@ -3,15 +3,16 @@ const cloudFile= require('../Utils/FileUpload')
 const router = express.Router()
 const upload = require('../middleware/multer')
 const User = require('../Models/UserModel')
+const fs = require('fs')
 const {protected} = require('../Controllers/userControllers')
 router.post('/upload',protected,upload,async function(req,res){
         try{
-            console.log(req.file.path)
             const response =await cloudFile(req.file.path)
             const user = await User.findById(req.user._id)
             user.photo = response.url
             user.isPhotoChange=true
             await user.save()
+            fs.unlinkSync(req.file.path)
             res.status(200).json({
                 status:'success',
                 data:user

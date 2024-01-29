@@ -12,6 +12,7 @@ import PasswordReset from './pages/ResetPass/PasswordReset.jsx'
 import DashBoard from './components/dashboard/DashBoard.jsx'
 import UserPage from './components/dashboard/UserPage.jsx'
 import ChangePassword from './components/dashboard/ChangePassword.jsx'
+import UpdateUser from './components/dashboard/UpdateUser.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
           },{
             path:'/DashBoard/changepass',
             element:<ChangePassword/>
+          },{
+            path:'/DashBoard/updateuser',
+            element:<UpdateUser/>
           }
         ]
       }

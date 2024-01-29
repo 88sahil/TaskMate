@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import { login } from './store/AuthSlice'
+import { Link } from 'react-router-dom'
 function App() {
   const [message,setmessage] = useState('')
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ function App() {
   const getUser = async()=>{
     api.get('http://localhost:3000/getuser').then((res)=>{
      setuser(res.data.user)
-     console.log(dispatch(login(res.data.user)))
+     dispatch(login(res.data.user))
     }).catch((err)=>{
       console.log(err)
         navigate('/login')
@@ -27,7 +28,8 @@ function App() {
   },[])
   return (
     <>
-    <div><img src={UserData.photo} alt="" /></div>
+    <Link to="/DashBoard">Dashboard</Link>
+      <Outlet/>
     </>
   )
   }

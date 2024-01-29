@@ -9,24 +9,38 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 import Signup from './pages/signupPage/SignUp.jsx'
 import ForgotPass from './pages/forgot/ForgotPass.jsx'
 import PasswordReset from './pages/ResetPass/PasswordReset.jsx'
+import DashBoard from './components/dashboard/DashBoard.jsx'
+import UserPage from './components/dashboard/UserPage.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
     element:<App/>,
-  },
-  {
-    path:'/login',
-    element:<LoginPage/>
-  },
-  {
-    path:'/signup',
-    element:<Signup/>
-  },{
-    path:'/forgotPassword',
-    element:<ForgotPass/>
-  },{
-    path:'/resetpass/:token',
-    element:<PasswordReset/>  
+    children:[
+      {
+        path:'/login',
+        element:<LoginPage/>
+      },
+      {
+        path:'/signup',
+        element:<Signup/>
+      },{
+        path:'/forgotPassword',
+        element:<ForgotPass/>
+      },{
+        path:'/resetpass/:token',
+        element:<PasswordReset/>  
+      },
+      {
+        path:'/DashBoard',
+        element:<DashBoard/>,
+        children:[
+          {
+            path:'/DashBoard/',
+            element:<UserPage/>
+          }
+        ]
+      }
+    ]
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
             message:"password isn't same"
         }
     },
+    createAt:{
+        type:Date,
+        default:Date.now()
+    },
     passwordChangeAt:Date,
     photo:{
         type:String,
@@ -33,7 +37,8 @@ const userSchema = new mongoose.Schema({
     },
     active:{
         type:Boolean,
-        default:true
+        default:true,
+        select:false
     },
     passwordresetToken:String,
     tokenexpries:Date,

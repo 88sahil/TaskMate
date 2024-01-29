@@ -165,3 +165,13 @@
     font-size: larger;
     border-radius: 8px;
 }
+.forgot-main{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.resetform{
+    box-shadow: 1px 1px rgb(229, 229, 229),-1px -1px rgb(229, 229, 229);
+}

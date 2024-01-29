@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bycrypt = require('bcrypt')
+const crypto = require('crypto')
 const userSchema = new mongoose.Schema({
     email:{
         type:String,
@@ -54,6 +55,12 @@ userSchema.methods.changepassword=function(jwttime){
         return jwt<changeAt
     }
     return false;
+}
+userSchema.methods.createResetToken=function(){
+    let resettoken = crypto.randomBytes(32).toString('hex')
+    this.passwordresetToken = crypto.createHash('sha256').update(resettoken).digest('hex')
+    this.tokenexpries = Date.now()+60*60*1000
+    return resettoken;
 }
 const User = mongoose.model('User',userSchema)
 

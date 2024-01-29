@@ -6,6 +6,7 @@ import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import LoginPage from './pages/LoginPage/LoginPage.jsx'
 import Signup from './pages/signupPage/SignUp.jsx'
 import ForgotPass from './pages/forgot/ForgotPass.jsx'
+import PasswordReset from './pages/ResetPass/PasswordReset.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -21,6 +22,9 @@ const router = createBrowserRouter([
   },{
     path:'/forgotPassword',
     element:<ForgotPass/>
+  },{
+    path:'/resetpass/:token',
+    element:<PasswordReset/>  
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(

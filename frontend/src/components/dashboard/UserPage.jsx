@@ -12,19 +12,26 @@ const UserPage = ()=>{
         withCredentials:true
     })
     const logout=()=>{
-        api.get('http://localhost:3000/api/user/logout').then((res)=>{
+            api.get('http://localhost:3000/Logout').then((res)=>{
             dispatch(Logout())
             alert('logged out!')
             navigate('/login')
-        }).catch((err)=>{
-        })
+            }).catch((err)=>{
+                alert('error 💀')
+            })
     }
     return(
         <div className="userpage">
-            {user.photo &&<img src={user.photo}></img>}
-            <p id="userName">{user.name}</p>
-            <p id="email">{user.email}</p>
-            <button onClick={logout}>LogOut</button>
+            <div>
+            <img src={user.photo}></img>
+            </div>
+            <div className="userpage1">
+                <p id="userName">{user.name}</p>
+                 <p id="email">{user.email}</p>
+            </div>
+        <div className="userpage">
+        <button onClick={logout}>LogOut</button>
+        </div>
         </div>
     )
 }

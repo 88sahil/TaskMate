@@ -11,7 +11,7 @@ const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const userschema = require('./Models/UserModel')
 const {promisify} = require('util')
 const jwt = require('jsonwebtoken')
-
+const router = require('./service/photoupload')
 App.use(express.json({max:'10kb'}))
 App.use(cors({
     credentials:true,
@@ -29,6 +29,7 @@ mongoose.connect(db).then((con)=>{
 })
 //main routes
 App.use('/api/user',User)
+App.use('/',router)
 //google auth
 App.use(session({
     secret:"158965aaad4e8e6d6d6d6d",
@@ -124,6 +125,24 @@ App.get('/getuser',async function(req,res){
          })
      }
 })
+App.get('/Logout',(req,res,next)=>{
+    try{
+        const cookieOption = {
+            expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
+            httpOnly:true
+         } 
+        res.cookie("jwt","",cookieOption)
+        req.user = ""
+        res.status(200).json({
+            status:'success',
+            msg:'logged out'
+        })
+    }catch(err){
+        res.status(400).json({
+            status:'fail',
+            msg:err.message
+        })
+    }})
 //server
 const port = process.env.PORT || 3000
 App.listen(port,()=>{

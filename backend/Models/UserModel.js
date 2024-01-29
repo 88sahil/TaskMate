@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
         default:true,
         select:false
     },
+    isPhotoChange:{
+        type:Boolean,
+        default:false
+    },
     passwordresetToken:String,
     tokenexpries:Date,
     googleID:String,

@@ -195,7 +195,7 @@ const protected = async(req,res,next)=>{
         }
         const user =await User.findById(decoded.id);
         if(!user){
-            throw new AppError("can't find user")
+            throw new Error("can't find user")
         }
         //password changeAt
         const isChange = user.changepassword(decoded.iap)
@@ -266,6 +266,7 @@ const logout =(req,res,next)=>{
         })
     }
 }
+
 module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass,logout}
 
 

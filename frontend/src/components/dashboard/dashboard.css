@@ -52,20 +52,24 @@
 .userpage{
     padding: 40px 0;
 }
-
-.userpage>img{
-    width: 200px;
-    height: 200px;
+.userpage>div{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.userpage>div>img{
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
 #userName{
-    width: 200px;
+    width: 300px;
     padding: 10px 30px;
     background-color: #ffcb43;
     text-align: center;
 }
 #email{
-    width: 200px;
+    width: 300px;
     padding: 10px 30px;
     background-color: #ffe195;
     text-align: center;
@@ -74,7 +78,6 @@
     padding: 20px 0x;
     height: 40px;
     margin-left: 30px;
-    margin-top: 40px;
     width:150px;
     background-color: #ffcb43;
     background-image: linear-gradient(319deg, #ffcb43 0%, #ff6425 37%, #ff0016 100%);
@@ -82,4 +85,8 @@
     color: white;
     font-size: larger;
     border-radius: 8px;
+}
+.userpage1{
+    display: flex;
+    flex-direction: column;
 }

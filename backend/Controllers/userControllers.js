@@ -182,13 +182,14 @@ const protected = async(req,res,next)=>{
     //get token
     let token;
         if(req.cookies.jwt){
-            token = req.cookie.jwt
+            token = req.cookies.jwt
         }
         if(!token){
             throw new Error('Please Login!')
         }
         //find user
         const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
+
         if(!decoded){
             throw new Error('Invalid Token')
         }
@@ -221,13 +222,20 @@ const changepass = async(req,res,next)=>{
      if(!user){
         throw new Error('no user Found!')
      }
-     const isCorrect = user.conformpassword(oldpassword,user.password)
+     const isCorrect = user.comparePassword(oldpassword,user.password)
      if(!isCorrect){
         throw new Error('incorrect old Password!')
      }
      user.password = newpassword
      user.conformpassword = conformnewpass
+     user.passwordChangeAt= Date.now()
      await user.save()
+     let token = createSignInToken(user._id)
+     const cookieOption = {
+        expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
+        httpOnly:true
+     } 
+     res.cookie("jwt",token,cookieOption)
      res.status(200).json({
         status:'sucess',
         msg:'password changed successfully'
@@ -239,7 +247,26 @@ const changepass = async(req,res,next)=>{
     })
     }
 }
-module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass}
+const logout =(req,res,next)=>{
+    try{
+        const cookieOption = {
+            expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
+            httpOnly:true
+         } 
+        res.cookie("jwt","",cookieOption)
+        req.user = null
+        res.status(200).json({
+            status:'success',
+            msg:'logged out'
+        })
+    }catch(err){
+        res.status(400).json({
+            status:'fail',
+            msg:err.message
+        })
+    }
+}
+module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass,logout}
 
 
 //login

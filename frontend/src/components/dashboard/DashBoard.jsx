@@ -17,9 +17,9 @@ const DashBoard = ()=>{
                     <Logo/>
                 </div>
                 <div className="buttons">
-                    <NavLink className="link" activeClassName="active" to={'/DashBoard'}><img src={user}></img><a>User</a></NavLink>
-                    <NavLink className="link" to="/DashBoard/changepass" activeClassName="active"><img src={cp}></img><a>change Password</a></NavLink>
-                    <NavLink className="link" to="/DashBoard/updateuser"activeClassName="active"><img src={uu}></img><a>Update User</a></NavLink>
+                    <NavLink className="link"  to='/DashBoard/user'><img src={user}></img><a>User</a></NavLink>
+                    <NavLink className="link" to="/DashBoard/changepass"><img src={cp}></img><a>change Password</a></NavLink>
+                    <NavLink className="link" to="/DashBoard/updateuser"><img src={uu}></img><a>Update User</a></NavLink>
                 </div>
             </div>
             <div className="dash-2">

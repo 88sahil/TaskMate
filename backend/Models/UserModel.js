@@ -56,8 +56,8 @@ userSchema.methods.comparePassword = async(candidatepassword,password)=>{
 }
 userSchema.methods.changepassword=function(jwttime){
     if(this.passwordChangeAt){
-        const changeAt =  parseInt(this.passwordChangeAt.getTIme()/1000,10)
-        return jwt<changeAt
+        const changeAt =  parseInt(this.passwordChangeAt.getTime()/1000,10)
+        return jwttime<changeAt
     }
     return false;
 }

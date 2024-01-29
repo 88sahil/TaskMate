@@ -7,14 +7,12 @@ import { Link } from 'react-router-dom'
 function App() {
   const [message,setmessage] = useState('')
   const dispatch = useDispatch()
-  const [UserData,setuser] = useState({})
   const navigate = useNavigate()
   const api = axios.create({
     withCredentials:true
   })
-  const getUser = async()=>{
+  const getUser =()=>{
     api.get('http://localhost:3000/getuser').then((res)=>{
-     setuser(res.data.user)
      dispatch(login(res.data.user))
     }).catch((err)=>{
       console.log(err)
@@ -22,7 +20,6 @@ function App() {
     })
    
     }
-  
   useEffect(()=>{
     getUser()
   },[])

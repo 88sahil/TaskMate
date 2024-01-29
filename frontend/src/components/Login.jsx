@@ -5,19 +5,24 @@ import axios from "axios";
 import Logo from "./Logo/Logo";
 import google from '../assets/image/google.png'
 import {useNavigate,Link} from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { login } from "../store/AuthSlice";
 const Login = () =>{
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [message,setmessage] = useState('')
     const {handleSubmit,register} = useForm()
-    const LoginUser = async(data)=>{
+    const LoginUser = (data)=>{
         const api = axios.create({
             withCredentials:true
         })
         const url = 'http://localhost:3000/api/user/login'
-        const user = await api.post(url,data)
-        if(user){
+        api.post(url,data).then((res)=>{
+            dispatch(login(res.data.user))
             navigate('/')
-        }
+        }).catch((err)=>{
+            alert(err.response.data.message)
+        })
     }
     const googleLogin=()=>{
         window.open("http://localhost:3000/auth/google/callback","_self")

@@ -11,6 +11,7 @@ import ForgotPass from './pages/forgot/ForgotPass.jsx'
 import PasswordReset from './pages/ResetPass/PasswordReset.jsx'
 import DashBoard from './components/dashboard/DashBoard.jsx'
 import UserPage from './components/dashboard/UserPage.jsx'
+import ChangePassword from './components/dashboard/ChangePassword.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -35,8 +36,11 @@ const router = createBrowserRouter([
         element:<DashBoard/>,
         children:[
           {
-            path:'/DashBoard/',
+            path:'/DashBoard/user',
             element:<UserPage/>
+          },{
+            path:'/DashBoard/changepass',
+            element:<ChangePassword/>
           }
         ]
       }

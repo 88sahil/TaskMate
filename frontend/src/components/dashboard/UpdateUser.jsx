@@ -33,11 +33,11 @@ const UpdateUser =()=>{
         <form onSubmit={handleSubmit(uploadFile)}>
             <label form="profile">Upload Picture: </label>
             <input type="file" name="profile" id="profile-ip" accept="image/*"  {...register("avatar",{
-                required:true
-            })}/>
-             <div className="userpage">
-            <button type="submit">Upload</button>
-        </div>
+                 required:true
+                    })}/>
+            <div className="userpage">
+                <button type="submit">Upload</button>
+            </div>
         </form>
        
         </div>

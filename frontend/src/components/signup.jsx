@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Logo from "./Logo/Logo";
 import {useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import './Components.css'
+import {login} from '../store/AuthSlice'
 const SignUp = () =>{
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const api = axios.create({
         withCredentials:true
@@ -15,7 +18,10 @@ const SignUp = () =>{
     const RegisterUser =(data)=>{
         const url = "http://localhost:3000/api/user/signup"
         api.post(url,data).then((res)=>{
+            alert('user created successfully')
+            dispatch(login(res.data.user))
             navigate('/')
+            
         }).catch((err)=>{
             seterror(err.response.data.msg)
         })

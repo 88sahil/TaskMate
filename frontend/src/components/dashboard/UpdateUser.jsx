@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {useForm} from 'react-hook-form'
 import './dashboard.css'
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,9 @@ const UpdateUser =()=>{
     const api = axios.create({
         withCredentials:true
     })
+    const [Loader,setLoader] = useState(false)
     const uploadFile =(data)=>{
+        setLoader(true)
         const image = {
             "avatar":data.avatar[0]
         }
@@ -21,7 +23,9 @@ const UpdateUser =()=>{
             }
         }).then((res)=>{
             dispatch(login(res.data.data))
+            setLoader(false)
         }).catch((err)=>{
+            setLoader(false)
             alert('error')
         })
     }
@@ -30,16 +34,19 @@ const UpdateUser =()=>{
         <div>
             <img src={user.photo}></img>
         </div>
-        <form onSubmit={handleSubmit(uploadFile)}>
-            <label form="profile">Upload Picture: </label>
-            <input type="file" name="profile" id="profile-ip" accept="image/*"  {...register("avatar",{
+        <form onSubmit={handleSubmit(uploadFile)} className="updateForm">
+            <label for="file-input" class="custom-file-input">
+                <span class="file-input-text">Choose File</span>
+                <input type="file" name="profile" id="file-input" class="file-input-field" accept="image/*"  {...register("avatar",{
                  required:true
                     })}/>
-            <div className="userpage">
+            </label>
+          
+            <div className="userpage updateBtn">
                 <button type="submit">Upload</button>
             </div>
         </form>
-       
+        {Loader && <div class="loader"></div>}
         </div>
     )
 }

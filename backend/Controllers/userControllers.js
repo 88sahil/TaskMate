@@ -211,7 +211,7 @@ const logout =(req,res,next)=>{
     }
 }
 
-module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass,logout}
+module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass,logout,checkasync}
 
 
 //login

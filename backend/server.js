@@ -13,6 +13,7 @@ const {promisify} = require('util')
 const jwt = require('jsonwebtoken')
 const router = require('./service/photoupload')
 const GlobalErrorHandle = require('./Utils/GlobalErrorHanlde')
+const project = require('./Routes/projectRoute')
 App.use(express.json({max:'10kb'}))
 App.use(cors({
     credentials:true,
@@ -31,6 +32,7 @@ mongoose.connect(db).then((con)=>{
 //erro handle middleware
 //main routes
 App.use('/api/user',User)
+App.use('/api/projects',project)
 App.use('/',router)
 //google auth
 App.use(session({

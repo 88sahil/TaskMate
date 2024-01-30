@@ -16,4 +16,13 @@ const cloudFile = async(path)=>{
       return err
    }
 }
-module.exports = cloudFile
+const deleteFile =async (id)=>{
+   try{
+      if(!id) return null;
+      let dfile = await cloudinary.uploader.destroy(id)
+      return dfile
+   }catch(err){
+      return null
+   }
+}
+module.exports = {cloudFile,deleteFile}

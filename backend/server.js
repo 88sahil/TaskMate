@@ -12,6 +12,7 @@ const userschema = require('./Models/UserModel')
 const {promisify} = require('util')
 const jwt = require('jsonwebtoken')
 const router = require('./service/photoupload')
+const GlobalErrorHandle = require('./Utils/GlobalErrorHanlde')
 App.use(express.json({max:'10kb'}))
 App.use(cors({
     credentials:true,
@@ -26,7 +27,8 @@ mongoose.connect(db).then((con)=>{
     console.log("database connect successfully")
 }).catch((err)=>{
     console.log(err.message)
-})
+}) 
+//erro handle middleware
 //main routes
 App.use('/api/user',User)
 App.use('/',router)
@@ -144,6 +146,7 @@ App.get('/Logout',(req,res,next)=>{
         })
     }})
 //server
+App.use(GlobalErrorHandle)
 const port = process.env.PORT || 3000
 App.listen(port,()=>{
     console.log(`someone is looking for you at localhost:${port}`)

@@ -3,12 +3,17 @@ const jwt = require('jsonwebtoken')
 const {promisify} = require('util')
 const crypto = require('crypto')
 const Email = require('../Utils/Email.js')
+const AppError = require('../Utils/Error.js')
 // const checkaync = fn =>{
 //     return (req,res,next)=>{
 //         fn(req,res,next).catch(next)
 //     }
 // }
-
+const checkasync = fn =>{
+    return (req,res,next)=>{
+        fn(req,res,next).catch(next)
+    }
+}
 const createSignInToken = (id) =>{
     let token = jwt.sign({id:id},process.env.token_secret,{
         expiresIn:process.env.token_expire
@@ -31,104 +36,69 @@ const createsignIn =(user,statuscode,res)=>{
     
 }
 //signUp
-const createUser = async(req,res,next)=>{
-    try{
+const createUser = checkasync(async(req,res,next)=>{
         const user = await User.create(req.body)
        
         //cookie option'
          
         createsignIn(user,201,res)
-        
-    }catch(err){
-        res.status(500).json({
-            status:'fail',
-            msg:err.message
-        })
-    }
-}
-const userLogin = async(req,res,next)=>{
-    try{
+})
+const userLogin = checkasync(async(req,res,next)=>{
         const {email,password} = req.body
         if(!email || !password){
-            throw new Error('please enter email or password')
+            return next(new AppError('please provide password',400))
         }
     //find user
     const user = await User.findOne({email:email}).select('+password')
     if(!user){
-        throw new Error("no user found")
+        return next(new AppError('no user found',404))
     }
     //compare password
     let correct =await user.comparePassword(password,user.password)
     if(!correct){
-        throw new Error('password is not same')
+        return next(new AppError("incorrect password"),400)
     }
     createsignIn(user,200,res)
-    }catch(err){
-        res.status(500).json({
-            status:'fail',
-            message:err.message
-        })
-    }
-}
-const verifyUser = async(req,res,next)=>{
-    try{
+})
+const verifyUser =checkasync (async(req,res,next)=>{
        if(!req.user){
         console.log("hello")
         let token = req.cookies.jwt
         if(!token){
-            throw new Error('no token available')
+            return next(new AppError('no token available',404))
         }
         //find user
         const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
         if(!decoded){
-            throw new Error('Invalid Token')
+           return next(new AppError('Invalid Token',500))
         }
         const user =await User.findById(decoded.id);
         if(!user){
-            throw new AppError("can't find user")
+            return next(new AppError('no user Found',404))
         }
         //password changeAt
         const isChange = user.changepassword(decoded.iap)
         if(isChange){
-            throw new Error('password changed')
+            return next(new AppError('password changed',400))
         }
 
         res.status(200).json({
             status:'success',
             data:user
         })
-       }else{
-        if(req.user){
-            console.log(req.user)
-            res.status(200).json({
-                message:'success',
-                user:req.user
-            })
-        }else{
-            res.status(400).json({
-                message:'fail'
-            })
-        }
        }
-    }catch(err){
-        res.status(404).json({
-            status:'fail',
-            message:err.message
-        })
-    }
-}
-const forgotpassword = async(req,res,next)=>{
-    try{
+})
+const forgotpassword = checkasync(async(req,res,next)=>{
         const email = req.body.email
          if(!email){
-            throw new Error('please provide Email')
-             }
+                return next(new AppError('please provide password',404))
+            }
              const user = await User.findOne({email:email})
              if(!user){
-                throw new Error('no user found!')
+                return next(new AppError('no user found',404))
              }
              if(user.googleID){
-                throw new Error('please login through google')
+                return next(new AppError('please login through Googele'))
              }
              const resettoken = user.createResetToken()
              await user.save({validateBeforeSave:false})
@@ -138,27 +108,21 @@ const forgotpassword = async(req,res,next)=>{
                 status:'success',
                 msg:'email send successfully'
              })
-    }catch(err){
-        res.status(400).json({
-            status:'fail',
-            msg:err.message
-        })
     }
-}
-const resetpassword=async(req,res,next)=>{
-   try{
+)
+const resetpassword=checkasync(async(req,res,next)=>{
      //take token from req
      const {token} = req.params
      const {password,conformpassword} = req.body
      if(!password || !conformpassword){
-         throw new Error('please provide data completely')
+         return next(new AppError('please provide data complete',404))
      }
      //get reset token and find user
      const resettoken = crypto.createHash('sha256').update(token).digest('hex')
      //find user
      const user = await User.findOne({passwordresetToken:resettoken,tokenexpries:{$gt:Date.now()}})
      if(!user){
-         throw new Error('token expired please try again ')
+         return next(new AppError('no user Found',404))
      }
      user.password = password
      user.conformpassword = conformpassword
@@ -170,49 +134,35 @@ const resetpassword=async(req,res,next)=>{
         msg:'password changed successfully'
      })
 
-   }catch(err){
-        res.status(400).json({
-            status:'fail',
-            msg:err.message
-        })
-   }
-}
-const protected = async(req,res,next)=>{
-   try{
+   })
+const protected = checkasync(async(req,res,next)=>{
     //get token
     let token;
         if(req.cookies.jwt){
             token = req.cookies.jwt
         }
         if(!token){
-            throw new Error('Please Login!')
+            return next(new AppError('please Login',500))
         }
         //find user
         const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
 
         if(!decoded){
-            throw new Error('Invalid Token')
+            return next(new AppError('Invalid Token',400))
         }
         const user =await User.findById(decoded.id);
         if(!user){
-            throw new Error("can't find user")
+            return next(new AppError('no user found!',404))
         }
         //password changeAt
         const isChange = user.changepassword(decoded.iap)
         if(isChange){
-            throw new Error('password changed')
+            return next(new AppError('password changed',500))
         }
         req.user = user
        next()
-   }catch(err){
-        res.status(500).json({
-            status:'fail',
-            msg:err.message
-        })
-   }
-}
-const changepass = async(req,res,next)=>{
-   try{
+   })
+const changepass = checkasync( async(req,res,next)=>{
      //get id from req.user
      const id = req.user._id
      //get oldpass and new pass
@@ -220,11 +170,11 @@ const changepass = async(req,res,next)=>{
      //get user
      const user = await User.findById(id).select('+password')
      if(!user){
-        throw new Error('no user Found!')
+        return next(new AppError('no user Found!',404))
      }
      const isCorrect = user.comparePassword(oldpassword,user.password)
      if(!isCorrect){
-        throw new Error('incorrect old Password!')
+        return next(new AppError('incorrect old Password!'))
      }
      user.password = newpassword
      user.conformpassword = conformnewpass
@@ -240,13 +190,7 @@ const changepass = async(req,res,next)=>{
         status:'sucess',
         msg:'password changed successfully'
      })
-   }catch(err){
-    res.status(500).json({
-        status:'fail',
-        msg:err.message
-    })
-    }
-}
+   })
 const logout =(req,res,next)=>{
     try{
         const cookieOption = {

@@ -4,7 +4,6 @@ cloudinary.config({
   api_key: '881525287337586', 
   api_secret: 'eyEHktdeOL8o-Dvu6WM0jSMJwjQ' 
 });
-console.log(process.env.cloud_name)
 const cloudFile = async(path)=>{
    try{
       if(!path) return null

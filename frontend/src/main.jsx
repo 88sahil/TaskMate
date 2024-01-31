@@ -28,9 +28,6 @@ const router = createBrowserRouter([
       },{
         path:'/forgotPassword',
         element:<ForgotPass/>
-      },{
-        path:'/resetpass/:token',
-        element:<PasswordReset/>  
       },
       {
         path:'/DashBoard',
@@ -49,7 +46,11 @@ const router = createBrowserRouter([
         ]
       }
     ]
-  }
+  },
+  {
+    path:'/resetpass/:token',
+    element:<PasswordReset/>  
+  },
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -1,6 +1,6 @@
 const express = require('express')
 const User = express.Router()
-const {createUser,userLogin,verifyUser,forgotpassword, resetpassword,protected,changepass,logout} = require('../Controllers/userControllers.js')
+const {createUser,userLogin,verifyUser,forgotpassword, resetpassword,protected,changepass,logout,FindUser} = require('../Controllers/userControllers.js')
 User.route('/signup').post(createUser)
 User.route('/login').post(userLogin)
 User.route('/verify').get(verifyUser)
@@ -8,4 +8,5 @@ User.route('/forgotpass').post(forgotpassword)
 User.route('/resetpass/:token').patch(resetpassword)
 User.route('/updatepass').patch(protected,changepass)
 User.route('/logout').get(logout)
+User.route('/finduser').post(FindUser)
 module.exports = User

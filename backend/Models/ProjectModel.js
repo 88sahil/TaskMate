@@ -27,7 +27,8 @@ const projectSchema = new mongoose.Schema({
         type:String,
         default:'less',
         enum:['less','medium','most']
-    }
+    },
+    discription:String
 },
 {   toJSON:{virtuals:true},
     toObject:{virtuals:true}

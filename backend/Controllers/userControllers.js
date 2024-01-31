@@ -210,8 +210,18 @@ const logout =(req,res,next)=>{
         })
     }
 }
-
-module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass,logout,checkasync}
+//find user by email
+const FindUser = checkasync(async(req,res,next)=>{
+    const {email} = req.body
+    const user = await User.findOne({email:email}).select('name email photo')
+    if(!user){
+        return next(new AppError('no user Found!',404))
+    }
+    res.status(200).json({
+        user
+    })
+})
+module.exports = {createUser,userLogin,verifyUser,forgotpassword,resetpassword,protected,changepass,logout,checkasync,FindUser}
 
 
 //login

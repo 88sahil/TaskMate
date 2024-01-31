@@ -95,7 +95,7 @@ App.get('/getuser',async function(req,res){
          if(!decoded){
              throw new Error('Invalid Token')
          }
-         const user =await userschema.findById(decoded.id);
+         const user =await userschema.findById(decoded.id).select('-password -isPhotoChange -photoid');
          if(!user){
              throw new AppError("can't find user")
          }

@@ -19,7 +19,7 @@ const Login = () =>{
         const url = 'http://localhost:3000/api/user/login'
         api.post(url,data).then((res)=>{
             dispatch(login(res.data.user))
-            navigate('/')
+            navigate('/Home/overview')
         }).catch((err)=>{
             alert(err.response.data.message)
         })

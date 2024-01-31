@@ -1,0 +1,145 @@
+:root{
+    -bg:rgba(173, 173, 173, 0.551)
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section{
+    display: flex;
+}
+.outlet{
+    width:82% ;
+    min-height: 100vh;
+    background-color: red;
+}
+.mainnav{
+    width: 300px;
+    min-height: 100vh;
+    border-right: 1px solid rgba(173, 173, 173, 0.551);
+}
+.main_menu{
+    padding:20px 10px;
+}
+.main_menu_user{
+    z-index: 1;
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    gap: 5px;
+    border: 2px solid rgb(202, 201, 201);
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+.main_menu_user>img{
+    border: 2px solid rgb(50, 20, 20);
+    border-radius: 50%;
+    width: 50px;
+    height:50px;
+}
+#user_email{
+    font-size: 15px;
+    color: gray;
+}
+#User_name{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bolder;
+}
+#down{
+    width: 20px;
+    height: 20px;  
+    transition: ease-in .1s;
+}
+.main_menu_user:hover #down{
+    transform: rotate(180deg);
+}
+.user_buttons{
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    left: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    bottom:-130px;
+    gap: 10px;
+    border: 1px solid red;
+    padding: 20px 0;
+    border-radius: 5px;
+    transition: linear .4s;
+    width:0;
+    height: 0;
+    overflow: hidden;
+    border: none;
+}
+.user_buttons>button{
+    width: 80%;
+    padding: 15px 20px;
+    border: none;
+    color: red;
+    font-weight: bold;
+}
+.logout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.logout>img{
+    width: 15px;
+    height: 15px;
+}
+.main_menu_user:hover .user_buttons{
+    width: 90%;
+    height: auto;
+}
+.menus{
+    width: 100%;
+    margin-top: 100px;
+    padding: 10px 10px;
+}
+#menuname{
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(111, 111, 111);
+}
+.mainmenus{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+.mainmenus>.menunavs{
+    display: flex;
+    background-color:var(-bg);
+    padding: 20px 10px;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color: gray;
+    align-items: center;
+    gap: 5px;
+}
+.menunavs>img{
+    width: 23px;
+    height: 23px;
+}
+.mainmenus>.active{
+    display: flex;
+    background-color:orange;
+    padding: 20px 10px;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+    color: white;
+}

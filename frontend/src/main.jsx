@@ -13,11 +13,23 @@ import DashBoard from './components/dashboard/DashBoard.jsx'
 import UserPage from './components/dashboard/UserPage.jsx'
 import ChangePassword from './components/dashboard/ChangePassword.jsx'
 import UpdateUser from './components/dashboard/UpdateUser.jsx'
+import MainPage from './components/ProjectDashBoard/MainPage.jsx'
+import HomeOver from './components/ProjectDashBoard/HomeOver.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
     element:<App/>,
     children:[
+      {
+        path:'/Home',
+        element:<MainPage/>,
+        children:[
+          {
+            path:'/Home/overview',
+            element:<HomeOver/>
+          }
+        ]
+      },
       {
         path:'/login',
         element:<LoginPage/>

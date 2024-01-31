@@ -14,6 +14,7 @@ function App() {
   const getUser =()=>{
     api.get('http://localhost:3000/getuser').then((res)=>{
      dispatch(login(res.data.user))
+     navigate('/Home/overview')
     }).catch((err)=>{
       console.log(err)
         navigate('/login')
@@ -25,7 +26,6 @@ function App() {
   },[])
   return (
     <>
-    <Link to="/DashBoard">Dashboard</Link>
       <Outlet/>
     </>
   )

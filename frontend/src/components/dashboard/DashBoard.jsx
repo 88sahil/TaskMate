@@ -8,7 +8,7 @@ import cp from '../../assets/image/password.png'
 import uu  from '../../assets/image/update.png'
 import {useSelector} from 'react-redux'
 const DashBoard = ()=>{
-    let User =  useSelector((state)=>state.auth.UserData)    
+    let User =  useSelector((state)=>state.auth.UserData) 
     const navigate = useNavigate()
     return(
         <div className="dash-main">

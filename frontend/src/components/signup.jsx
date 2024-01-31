@@ -20,7 +20,7 @@ const SignUp = () =>{
         api.post(url,data).then((res)=>{
             alert('user created successfully')
             dispatch(login(res.data.user))
-            navigate('/')
+            navigate('/Home/overview')
             
         }).catch((err)=>{
             seterror(err.response.data.msg)

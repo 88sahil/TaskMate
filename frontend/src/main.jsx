@@ -18,6 +18,7 @@ import HomeOver from './components/ProjectDashBoard/HomeOver.jsx'
 import TaskList from './components/ProjectDashBoard/TaskList.jsx'
 import ProjectOverview from './components/ProjectDashBoard/ProjectOverview.jsx'
 import Calendar from './components/ProjectDashBoard/Calendar.jsx'
+import ProjectPage from './components/ProjectDashBoard/ProjectPage.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
           {
             path:'/Home/calendar',
             element:<Calendar/>
+          },{
+            path:'/Home/ProjectPage/:projectid',
+            element:<ProjectPage/>
           }
         ]
       },

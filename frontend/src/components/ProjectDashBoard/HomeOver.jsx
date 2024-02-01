@@ -1,35 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useSelector} from 'react-redux'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {useForm} from 'react-hook-form'
 import axios from 'axios'
 import './Menu.css'
+import ProjectCard from "./ProjectCard";
+export const Condate = (dates)=>{
+    let date = new Date(dates)
+    date =`${date.getDate()} ${date.toLocaleDateString('en-us',{Date:'numeric',month:'long',year:'numeric'})}`
+    return date
+}
 const HomeOver =()=>{
     const {handleSubmit,register} = useForm()
     const [showform,setshowform] = useState(false)
     const [Loader,setLoader] = useState(false)
-    const Condate = (dates)=>{
-        let date = new Date(dates)
-        date =`${date.getDate()} ${date.toLocaleDateString('en-us',{Date:'numeric',month:'long',year:'numeric'})}`
-        return date
-    }
-    const [project,setproject] = useState([])
+    const [Projects,setProjects] = useState([])
+    
     let user = useSelector((state)=>state.auth.UserData)
     const api =  axios.create({
         withCredentials:true
     })
-    //create project
-    const createProject =(data)=>{
+    //get all project for user
+    const getProjects =()=>{
         setLoader(true)
-        setshowform(false)
-        api.post('/api/projects/',data).then((res)=>{
-            setproject(res.data.project)
+        api.get('/api/projects').then((res)=>{
+            setProjects(res.data.projects)
             setLoader(false)
         }).catch((err)=>{
             console.log(err)
         })
     }
+    //create project
+    const createProject =(data)=>{
+        setLoader(true)
+        setshowform(false)
+        api.post('/api/projects/',data).then((res)=>{
+            getProjects()
+            setLoader(false)
+        }).catch((err)=>{
+            alert(err.data)
+        })
+    }
+    useEffect(()=>{
+        getProjects()
+    },[])
     return(
         <div className="homeover">
             <div className="hodiv1">
@@ -37,11 +52,11 @@ const HomeOver =()=>{
                 <a><CalendarMonthIcon/>{Condate(Date.now())}</a>
             </div>
             <div className="PoMain">
-                <button onClick={()=>setshowform(true)}>AddProject <AddCircleIcon sx={{color:"white"}}/></button>
+                <button onClick={()=>setshowform((prev)=>!prev)}>AddProject <AddCircleIcon sx={{color:"white"}}/></button>
                 {showform && <form className="projectform" onSubmit={handleSubmit(createProject)}>
                     <div className="frm1">
                         <label htmlFor="projectname">ProjectName:</label>
-                        <input type="text" name="projectname" placeholder="eg.,TaskMate" {...register("name",{required:true})}></input>
+                        <input type="text" name="projectname" placeholder="eg.,TaskMate" {...register("name",{required:true})} required></input>
                     </div>
                     <div className="frm1">
                         <label htmlFor="Discription">Discription:</label>
@@ -64,9 +79,16 @@ const HomeOver =()=>{
                         <button onClick={()=>setshowform(false)}>Cancel</button>
                     </div>
                 </form>}
-                <div>
-                    <a>{project.name}</a>
-                    <a>{project.discription}</a>
+                <div className="projectdata">
+                    { Projects.length>0? 
+                        Projects.map((ele,index)=>{
+                             return(
+                                    <ProjectCard ele={ele} index={index}/>
+                             )
+                        }): (
+                            <div>No record found!</div>
+                        )
+                    } 
                 </div>
                {Loader && <div className="loader"></div>}
             </div>

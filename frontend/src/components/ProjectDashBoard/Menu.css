@@ -15,6 +15,7 @@ section{
 }
 .mainnav{
     width: 300px;
+    overflow: hidden;
     min-height: 100vh;
     border-right: 1px solid rgba(173, 173, 173, 0.551);
 }
@@ -259,4 +260,59 @@ section{
       33%  {background-position:    0% 33% ,100% 33% ,200% 33% }
       66%  {background-position: -100%  66%,0%   66% ,100% 66% }
       100% {background-position:    0% 100%,100% 100%,200% 100%}
+  }
+
+.projectdata{
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+  /* projectCard */
+
+
+  .projectCard{
+        background-color: rgb(228, 238, 239);
+        width: 300px;
+        height: 200px;
+        border-radius: 20px;
+        padding: 10px 10px;
+        box-shadow:  1px 1px 2px #8b8a8a,
+             -1px 1px 2px #ffffff;
+             position: relative;
+  }
+  .card-1{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    font-weight: 200;
+    font-size: small;
+  }
+  .go{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 50%;
+    border: 1px solid black;
+    transition: linear .2s;
+  }
+  .go:hover{
+    transform: rotate(45deg);
+  }
+  .last{
+    position: absolute;
+    bottom: 0;
+    right: 4%;
+  }
+  .last>img{
+    width: 40px;
+    height: 40px;
+    border-radius:50% ;
+  }
+  .projectCard>h1{
+    margin-top: 40px;
+    margin-left: 2px;
   }

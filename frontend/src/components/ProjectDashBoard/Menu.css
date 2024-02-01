@@ -12,7 +12,6 @@ section{
 .outlet{
     width:82% ;
     min-height: 100vh;
-    background-color: red;
 }
 .mainnav{
     width: 300px;
@@ -122,13 +121,14 @@ section{
 .mainmenus>.menunavs{
     display: flex;
     background-color:var(-bg);
-    padding: 20px 10px;
+    padding: 20px 20px;
     font-weight: bold;
     font-size: 16px;
     text-decoration: none;
     color: gray;
     align-items: center;
     gap: 5px;
+    border-radius: 15px;
 }
 .menunavs>img{
     width: 23px;
@@ -143,3 +143,120 @@ section{
     text-decoration: none;
     color: white;
 }
+.calendar{
+    margin-left: 15px;
+}
+.po{
+    width: 100%;
+    background-color: red;
+}
+
+
+/* home overview */
+.hodiv1{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 5px;
+    padding-left: 20px;
+}
+.hodiv1>a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium
+    ;
+}
+.PoMain{
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px 20px;
+}
+.PoMain>button,.formbuttons>button{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    gap:5px ;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    background-color: #ffcb43;
+    background-image: linear-gradient(319deg, #ffcb43 0%, #ff6425 37%, #ff0016 100%);
+}
+.projectform{
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 350px;
+    padding: 20px 40px;
+    z-index: 2000;
+    background-color: #fff5ee;
+    box-shadow: 1px 1px 2px rgb(198, 192, 192),
+                -1px 1px 2px rgb(208, 202, 202);
+}
+.projectform>.frm1{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.projectform>.frm1>label{
+    font-weight: bolder;
+}
+.frm1>input::placeholder,.frm1>textarea::placeholder{
+    font-weight: bolder;
+}
+.frm1>input{
+    padding: 8px 10px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+.frm1>textarea{
+    outline: none;
+    padding: 8px 10px;
+    border: none;
+    font-weight: bold;
+}
+.frm1>select{
+    padding: 8px 15px;
+    border: none;
+    font-weight: bold;
+}
+.formbuttons{
+    display: flex;
+    justify-content: space-around;
+}
+.formbuttons>button{
+    width: 80px;
+}
+/* HTML: <div class="loader"></div> */
+.loader {    
+    --r1: 154%;
+    --r2: 68.5%;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%; 
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    background:
+      radial-gradient(var(--r1) var(--r2) at top   ,#0000 79.5%,#269af2 80%),
+      radial-gradient(var(--r1) var(--r2) at bottom,#269af2 79.5%,#0000 80%),
+      radial-gradient(var(--r1) var(--r2) at top   ,#0000 79.5%,#269af2 80%),
+      #ccc;
+    background-size: 50.5% 220%;
+    background-position: -100% 0%,0% 0%,100% 0%;
+    background-repeat:no-repeat;
+    animation: l9 2s infinite linear;
+  }
+  @keyframes l9 {
+      33%  {background-position:    0% 33% ,100% 33% ,200% 33% }
+      66%  {background-position: -100%  66%,0%   66% ,100% 66% }
+      100% {background-position:    0% 100%,100% 100%,200% 100%}
+  }

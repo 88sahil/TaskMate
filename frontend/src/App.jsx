@@ -5,14 +5,14 @@ import {useDispatch} from 'react-redux'
 import { login } from './store/AuthSlice'
 import { Link } from 'react-router-dom'
 function App() {
-  const [message,setmessage] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const api = axios.create({
     withCredentials:true
   })
   const getUser =()=>{
-    api.get('http://localhost:3000/getuser').then((res)=>{
+    api.get('http://localhost:3000/api/user/verify').then((res)=>{
+      console.log(res)
      dispatch(login(res.data.user))
      navigate('/Home/overview')
     }).catch((err)=>{

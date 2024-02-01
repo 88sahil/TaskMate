@@ -13,9 +13,11 @@ const DashBoard = ()=>{
     return(
         <div className="dash-main">
             <div className="dash-1">
-                <div className="logo">
-                    <Logo/>
-                </div>
+                    <NavLink to='/Home/overview' className='logonav'>
+                        <div className="logo">
+                            <Logo/>
+                        </div>
+                    </NavLink>
                 <div className="buttons">
                     <NavLink className="link"  to='/DashBoard/user'><img src={user}></img><a>User</a></NavLink>
                     <NavLink className="link" to="/DashBoard/changepass"><img src={cp}></img><a>change Password</a></NavLink>

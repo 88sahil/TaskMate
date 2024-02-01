@@ -21,9 +21,9 @@ const projectSchema = new mongoose.Schema({
     }],
     status:{
         type:String,
-
+        default:'continue'
     },
-    pririty:{
+    priority:{
         type:String,
         default:'less',
         enum:['less','medium','most']

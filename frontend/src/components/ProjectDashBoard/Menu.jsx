@@ -48,9 +48,9 @@ const Menu =()=>{
                         <p id='menuname'>Menu</p>
                         <div className="mainmenus">
                             <NavLink className='menunavs' to="/Home/overview"><img src={overview}></img>OverView</NavLink>
-                            <NavLink className='menunavs' to="/"><img src={market}></img>TaskList</NavLink>
-                            <NavLink className='menunavs' to="/"><img src={po}></img>ProjectOverview</NavLink>
-                            <NavLink className='menunavs' to="/"><img src={cl}></img>Calendar</NavLink>
+                            <NavLink className='menunavs' to="/Home/TaskList"><img src={market}></img>TaskList</NavLink>
+                            <NavLink className='menunavs' to="/Home/Projectoverview"><img src={po}></img>ProjectOverview</NavLink>
+                            <NavLink className='menunavs' to="/Home/calendar"><img src={cl}></img>Calendar</NavLink>
                         </div>
                     </div>
             </div>

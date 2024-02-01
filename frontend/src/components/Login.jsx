@@ -3,7 +3,6 @@ import './Components.css'
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Logo from "./Logo/Logo";
-import google from '../assets/image/google.png'
 import {useNavigate,Link} from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { login } from "../store/AuthSlice";
@@ -23,9 +22,6 @@ const Login = () =>{
         }).catch((err)=>{
             alert(err.response.data.message)
         })
-    }
-    const googleLogin=()=>{
-        window.open("http://localhost:3000/auth/google/callback","_self")
     }
     return(
         <div className="signuppage">
@@ -57,10 +53,6 @@ const Login = () =>{
             </div>
             <button type="submit">Login</button>
             <Link to="/forgotPassword"><a>Forgot Password?</a></Link>
-            <p>-OR-</p>
-            <div className="google">
-                <button onClick={googleLogin}><img src={google} alt="google" /><a>SIGNIN WITH GOOGLE</a></button>
-            </div>
        </form>
         </div>
       </div>

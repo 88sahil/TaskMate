@@ -15,6 +15,9 @@ import ChangePassword from './components/dashboard/ChangePassword.jsx'
 import UpdateUser from './components/dashboard/UpdateUser.jsx'
 import MainPage from './components/ProjectDashBoard/MainPage.jsx'
 import HomeOver from './components/ProjectDashBoard/HomeOver.jsx'
+import TaskList from './components/ProjectDashBoard/TaskList.jsx'
+import ProjectOverview from './components/ProjectDashBoard/ProjectOverview.jsx'
+import Calendar from './components/ProjectDashBoard/Calendar.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -27,6 +30,17 @@ const router = createBrowserRouter([
           {
             path:'/Home/overview',
             element:<HomeOver/>
+          },
+          {
+            path:'/Home/TaskList',
+            element:<TaskList/>
+          },{
+            path:'/Home/Projectoverview',
+            element:<ProjectOverview/>
+          },
+          {
+            path:'/Home/calendar',
+            element:<Calendar/>
           }
         ]
       },

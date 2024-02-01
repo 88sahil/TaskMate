@@ -101,5 +101,18 @@ const RemoveTag = checkasync(async(req,res,next)=>{
         project
     })
 })
+//get single project
+const getProject = checkasync(async(req,res,next)=>{
+    const {projectid} = req.params
+    const project =await Projects.findById(projectid)
+    if(!project){
+        return next(new AppError('no any project available fot this id',404))
+    }
+
+    res.status(200).json({
+        status:'success',
+        project
+    })
+})
 //exports modules
-module.exports = {createProject,getProjects,DeleteProject,AddTeam,DeleteTeam,AddTag,RemoveTag}
+module.exports = {createProject,getProjects,DeleteProject,AddTeam,DeleteTeam,AddTag,RemoveTag,getProject}

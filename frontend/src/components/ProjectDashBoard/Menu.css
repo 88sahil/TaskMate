@@ -340,6 +340,9 @@ section{
     font-size:30px;
     margin-top: 20px;
   }
+  .project-display:hover #deleteproject{
+    display: block;
+  }
   .project-head-1>a{
     margin-top: 50px;
     color: white;
@@ -406,4 +409,118 @@ section{
     display: flex;
     align-items: center;
     gap: 5px;
+  }
+  .Tagsrow{
+    display: flex;
+  }
+  #Tags{
+    display: flex;
+    gap: 8px;
+  }
+  #Tags>a{
+    background-color: #cacaca;
+    font-weight: bolder;
+    color: rgb(48, 31, 31);
+    padding: 2.5px 5px;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    border-radius: 10px;
+  }
+  #Tags>a>button{
+    background-color: #ee525f;
+    color: white;
+    border: none;
+    padding: 0 5px;
+    border-radius: 5px;
+  }
+
+  #tagform{
+    display: flex;
+  }
+  #tagform>input{
+    padding: 0 10px;
+    font-weight: bold;
+  }
+  #tagform>button{
+    margin-left: 5px;
+    background-color: #ffcb43;
+    background: transparent;
+    border-radius: 2px;
+    padding: 0 5px;
+    border: none;
+    background-image: linear-gradient(319deg, #ffcb43 0%, #ff6425 37%, #ff0016 100%);
+  }
+  .FindUser{
+    position: absolute;
+    z-index: 2000;
+    top: 40%;
+    left: 50%;
+    background-color: #cacacaad;
+    padding: 20px;
+  }
+  .userdiv{
+     display: flex;
+     gap: 5px;
+     align-items: center;
+     margin-top: 15px;
+     font-weight: bolder;
+  }
+  .userdiv>img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+  .userdiv>button{
+    background-color: #269af2;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-weight: bolder;
+    color: white;
+  }
+  #userForm>input{
+     padding: 10px 15px;
+     border: none;
+     outline: none;
+     border-radius: 8px;
+  }
+  #userForm>button{
+      padding: 10px 10px;
+      border: none;
+      border-radius: 8px;
+      margin-left: 10px;
+  }
+  #plus{
+    font-weight: bolder;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+  }
+  #deleteproject{
+    padding: 10px 20px;
+    border: none;
+    font-weight: bolder;
+    color: red;
+    background-color: #cacacab6;
+    position: absolute;
+    z-index: 20;
+    display: none;
+    transition: all .3s;
+  }
+  #projectname{
+    display: flex;
+    align-items: center;
+  }
+  #projectname:hover #arrow{
+    transform: rotate(180deg);
+    transition: all .4s;
+  }
+  #discription{
+    width: 500px;
+    color: #8b8a8a;
+    font-weight: 200;fr
   }

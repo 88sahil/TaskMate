@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {useForm} from 'react-hook-form'
 import axios from 'axios'
 import './Menu.css'
 import { Condate } from "./HomeOver";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 const ProjectPage=()=>{
+    const navigate = useNavigate()
     const {handleSubmit,register} = useForm()
     const [Loader,setLoader] = useState(true)
+    const [showtag,setshowtag] = useState(false)
+    const [showuform,setshowuform] = useState(false)
+    const [fuser,setfuser] = useState(null)
     const {projectid} = useParams()
     const [project,setproject] = useState(null)
     let date = Condate(Date.now())
@@ -24,9 +29,42 @@ const ProjectPage=()=>{
     }
     const Addtags =(data)=>{
         api.patch(`/api/projects/addtag/${projectid}`,data).then((res)=>{
+            setshowtag(false)
             FindProject()
         }).catch((err)=>{
             console.log(err)
+        })
+    }
+    const DeleteTag = (name)=>{
+        const data = {tag:name}
+        api.patch(`/api/projects/removetag/${projectid}`,data).then((res)=>{
+            FindProject()
+        }).catch((err)=>{
+            alert('err💀')
+        })
+    }
+    const FindUser =(data)=>{
+        api.post('/api/user/finduser',data).then((res)=>{
+            setfuser(res.data.user)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+    const Adduser =(id)=>{
+        const data = {userId:id}
+        api.patch(`/api/projects/addteam/${projectid}`,data).then((res)=>{
+            setshowuform(false)
+            setfuser(null)
+            FindProject()
+        }).catch((err)=>{
+            alert('error💀')
+        })
+    }
+    const deleteproject = ()=>{
+        api.delete(`/api/projects/${projectid}`).then((res)=>{
+            navigate('/Home/overview')
+        }).catch((err)=>{
+            alert('error')
         })
     }
     useEffect(()=>{
@@ -40,8 +78,9 @@ const ProjectPage=()=>{
                 <div className="project-head-1">
                  <div className="project-display">
                     <a>project/{project.name}</a>
-                    <h1>{project.name}</h1>
-                    </div>
+                    <h1 id="projectname">{project.name} <ArrowDropDownIcon id="arrow" sx={{fontSize:50}}/></h1>
+                    <button id="deleteproject" onClick={deleteproject}>Delete {project.name}</button>
+                </div>
                 <a><CalendarMonthIcon/>{date}</a>
                 </div>    
              </div>
@@ -55,15 +94,21 @@ const ProjectPage=()=>{
                         <th>DueDate</th>
                         <td id="duedate">{Condate(project.DueDate)}</td>
                     </tr>
-                    <tr>
+                    <tr className="Tagsrow">
                         <th>Tags</th>
                         <td id="Tags">{
                             project.tags.length>0?(project.tags.map((ele,index)=>(
-                                <a key={index}><img src={ele.photo}></img>{ele}</a>
+                                <a key={index}>{ele}<button onClick={()=>DeleteTag(ele)}>x</button></a>
                             ))):(
                                 <a>no tags available</a>
                             )
-                        }<button className="addtag">+</button></td>
+                        }<button className="addtag" onClick={()=>setshowtag((prev)=>!prev)}>+</button>
+                        {showtag && <form onSubmit={handleSubmit(Addtags)} id="tagform">
+                            <input type="text" placeholder="Eg., Design"   {...register("tag",{
+                                 required:true
+                            })} required/>
+                        <button type="submit">AddTag</button>
+                </form>}</td>
                     </tr>
                     <tr className="teams">
                         <th>Team</th>
@@ -73,21 +118,25 @@ const ProjectPage=()=>{
                                                 <img src={member.photo} alt={member.name} />
                                                 <a>{member.name}</a>
                                             </div>
-                                        ))):(<a className="more">no team available</a>)}{project.team.length>2 && <a>`${project.team.length-2}`</a>}<button className="addtag">+</button></td>
+                                        ))):(<a className="more">no team available</a>)}{project.team.length>2 && <a id="plus">&#x2b;{project.team.length-2}</a>}<button className="addtag" onClick={()=>setshowuform((prev)=>!prev)}>+</button></td>
                     </tr>
                     <tr>
                         <th>Discpription</th>
-                        <td>{project.discription}</td>
+                        <td id="discription">{project.discription}</td>
                     </tr>
                 </table>
-                <div className="tagform">
-                    <form onSubmit={handleSubmit(Addtags)}>
-                            <input type="text"   {...register("tag",{
-                                required:true
-                            })} required/>
-                            <button type="submit">AddTag</button>
-                    </form>
-                </div>
+                {showuform && <div className="FindUser">
+                        <form onSubmit={handleSubmit(FindUser)} id="userForm">
+                            <input type="text" name="find" id="find" placeholder="eg., xyx@gmail.com" required {...register("email")}/>
+                            <button type="submit">Find</button>
+                        </form>
+                       {fuser && 
+                       <div className="userdiv">
+                            <img src={fuser.photo} />
+                            <a>{fuser.email}</a> 
+                            <button onClick={()=>Adduser(fuser._id)}>Add</button>
+                        </div>}
+                </div>}
             </div> 
             </>
         ):(

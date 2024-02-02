@@ -16,8 +16,7 @@ const createProject = checkasync(async(req,res,next)=>{
     await project.save()
 
     res.status(201).json({
-        status:'success',
-        project
+        status:'success'
     })
 })
 //get projects
@@ -55,8 +54,7 @@ const AddTeam = checkasync(async(req,res,next)=>{
         return next(new AppError('cant able to update',500))
     }
     res.status(200).json({
-        status:'success',
-        project
+        status:'success'
     })
 })
 //delete team in array
@@ -69,8 +67,7 @@ const DeleteTeam = checkasync(async(req,res,next)=>{
         return next(new AppError('cant able to delete team member'),500)
     }
     res.status(200).json({
-        status:'success',
-        project
+        status:'success'
     })
 })
 //insert tags
@@ -83,8 +80,7 @@ const AddTag = checkasync(async(req,res,next)=>{
         return next(new AppError("can't able to add tag",500))
     }
     res.status(200).json({
-        status:'succes',
-        project
+        status:'succes'
     })
 })
 //delete tag
@@ -97,8 +93,7 @@ const RemoveTag = checkasync(async(req,res,next)=>{
         return next(new AppError("can't able to Remove tag",500))
     }
     res.status(200).json({
-        status:'succes',
-        project
+        status:'succes'
     })
 })
 //get single project

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import {useForm} from 'react-hook-form'
 import axios from 'axios'
 import './Menu.css'
 import { Condate } from "./HomeOver";
 const ProjectPage=()=>{
+    const {handleSubmit,register} = useForm()
     const [Loader,setLoader] = useState(true)
     const {projectid} = useParams()
     const [project,setproject] = useState(null)
-    console.log(project)
     let date = Condate(Date.now())
     const api = axios.create({
         withCreadials:true
@@ -21,7 +22,13 @@ const ProjectPage=()=>{
             console.log(err.message)
         })
     }
-    console.log(project)
+    const Addtags =(data)=>{
+        api.patch(`/api/projects/addtag/${projectid}`,data).then((res)=>{
+            FindProject()
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     useEffect(()=>{
         FindProject()
     },[])
@@ -74,6 +81,12 @@ const ProjectPage=()=>{
                     </tr>
                 </table>
                 <div className="tagform">
+                    <form onSubmit={handleSubmit(Addtags)}>
+                            <input type="text"   {...register("tag",{
+                                required:true
+                            })} required/>
+                            <button type="submit">AddTag</button>
+                    </form>
                 </div>
             </div> 
             </>

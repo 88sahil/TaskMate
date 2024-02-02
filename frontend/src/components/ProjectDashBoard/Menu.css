@@ -197,7 +197,7 @@ section{
     width: 350px;
     padding: 20px 40px;
     z-index: 2000;
-    background-color: #fff5ee;
+    background: #fff5ee;
     box-shadow: 1px 1px 2px rgb(198, 192, 192),
                 -1px 1px 2px rgb(208, 202, 202);
 }

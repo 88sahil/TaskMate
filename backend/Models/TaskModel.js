@@ -11,7 +11,7 @@ const taskSchema = new mongoose.Schema({
     progress:{
         type:String,
         default:'created',
-        enum:['created','continue','completed']
+        enum:['created','in progress','completed']
     },
     author:{
         type:mongoose.Schema.ObjectId,
@@ -30,7 +30,15 @@ const taskSchema = new mongoose.Schema({
     toObject:{virtuals:true}
 })
 
-
+taskSchema.pre(/^find/,function(){
+    this.populate({
+        path:'author',
+        select:'name photo email'
+    }).populate({
+        path:'team',
+        select:'name photo email'
+    })
+})
 
 const Tasks = mongoose.model("Tasks",taskSchema)
 

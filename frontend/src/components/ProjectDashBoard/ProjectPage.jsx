@@ -6,6 +6,7 @@ import axios from 'axios'
 import './Menu.css'
 import { Condate } from "./HomeOver";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 const ProjectPage=()=>{
     const navigate = useNavigate()
     const {handleSubmit,register} = useForm()
@@ -19,6 +20,7 @@ const ProjectPage=()=>{
     const api = axios.create({
         withCreadials:true
     })
+    //find project
     const FindProject =()=>{
         api.get(`/api/projects/${projectid}`).then((res)=>{
             setproject(res.data.project)
@@ -27,6 +29,7 @@ const ProjectPage=()=>{
             console.log(err.message)
         })
     }
+    //add tag
     const Addtags =(data)=>{
         api.patch(`/api/projects/addtag/${projectid}`,data).then((res)=>{
             setshowtag(false)
@@ -35,6 +38,7 @@ const ProjectPage=()=>{
             console.log(err)
         })
     }
+    //deletetag
     const DeleteTag = (name)=>{
         const data = {tag:name}
         api.patch(`/api/projects/removetag/${projectid}`,data).then((res)=>{
@@ -43,6 +47,7 @@ const ProjectPage=()=>{
             alert('err💀')
         })
     }
+    //find user
     const FindUser =(data)=>{
         api.post('/api/user/finduser',data).then((res)=>{
             setfuser(res.data.user)
@@ -50,6 +55,7 @@ const ProjectPage=()=>{
             console.log(err)
         })
     }
+    //ad user in project
     const Adduser =(id)=>{
         const data = {userId:id}
         api.patch(`/api/projects/addteam/${projectid}`,data).then((res)=>{
@@ -60,6 +66,7 @@ const ProjectPage=()=>{
             alert('error💀')
         })
     }
+    //deletepoject
     const deleteproject = ()=>{
         api.delete(`/api/projects/${projectid}`).then((res)=>{
             navigate('/Home/overview')
@@ -67,6 +74,10 @@ const ProjectPage=()=>{
             alert('error')
         })
     }
+    const addtask = (data)=>{
+        console.log(data)
+    }
+    console.log(new Date("2024-02-03T18:14"))
     useEffect(()=>{
         FindProject()
     },[])
@@ -138,6 +149,14 @@ const ProjectPage=()=>{
                         </div>}
                 </div>}
             </div> 
+                        {/* //TODO - taks block starts here */}
+                        <div className="taskblock">
+                            <button>AddTask<ArrowCircleDownIcon/></button>
+                            <form onSubmit={handleSubmit(addtask)}>
+                                <input type="datetime-local" {...register("from")} min={Date.now()} max={project.DueDate}required/>
+                                <button>submit</button>
+                            </form>
+                        </div>
             </>
         ):(
             Loader && <div className="loader"></div>

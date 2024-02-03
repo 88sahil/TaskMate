@@ -1,7 +1,7 @@
 const Projects = require('../Models/ProjectModel')
 const {checkasync} = require('./userControllers')
 const AppError = require('../Utils/Error')
-
+const Tasks = require('../Models/TaskModel')
 
 //create project
 const createProject = checkasync(async(req,res,next)=>{
@@ -39,7 +39,8 @@ const DeleteProject = checkasync(async(req,res,next)=>{
     const deleteproject = await Projects.findByIdAndDelete(id)
     if(!deleteproject){
         return next(new AppError('cant delete project'),400)
-    }
+    }  
+    const taks = await Tasks.findOneAndDelete({project:id})
     //have to delete all tasks belong to this project after taskmodeling
     res.status(200).json({
         status:'success'
@@ -99,7 +100,7 @@ const RemoveTag = checkasync(async(req,res,next)=>{
 //get single project
 const getProject = checkasync(async(req,res,next)=>{
     const {projectid} = req.params
-    const project =await Projects.findById(projectid)
+    const project =await Projects.findById(projectid).populate('task')
     if(!project){
         return next(new AppError('no any project available fot this id',404))
     }

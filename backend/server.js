@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser')
 const router = require('./service/photoupload')
 const GlobalErrorHandle = require('./Utils/GlobalErrorHanlde')
 const project = require('./Routes/projectRoute')
+const TaskR = require('./Routes/TaskRoute')
 App.use(express.json({max:'10kb'}))
 App.use(cors({
     credentials:true,
@@ -27,6 +28,7 @@ mongoose.connect(db).then((con)=>{
 //main routes
 App.use('/api/user',User)
 App.use('/api/projects',project)
+App.use('/api/tasks',TaskR)
 App.use('/',router)    
 App.get('/Logout',(req,res,next)=>{
     try{

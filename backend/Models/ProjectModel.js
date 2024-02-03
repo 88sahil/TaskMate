@@ -33,6 +33,12 @@ const projectSchema = new mongoose.Schema({
 {   toJSON:{virtuals:true},
     toObject:{virtuals:true}
 })
+
+projectSchema.virtual('task',{
+    ref:'Tasks',
+    foreignField:'project',
+    localField:'_id'
+})
 projectSchema.pre(/^find/,function(next){
     this.populate({
         path:'author',

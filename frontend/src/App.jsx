@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Outlet, useNavigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import { login } from './store/AuthSlice'
-import { Link } from 'react-router-dom'
+import './App.css'
 function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()

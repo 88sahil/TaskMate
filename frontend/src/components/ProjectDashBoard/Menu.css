@@ -201,7 +201,8 @@ section{
     width: 350px;
     padding: 20px 40px;
     z-index: 2000;
-    background: #fff5ee;
+    background: #ffbb0044;
+    border-radius: 5px;
     box-shadow: 1px 1px 2px rgb(198, 192, 192),
                 -1px 1px 2px rgb(208, 202, 202);
 }
@@ -536,4 +537,21 @@ section{
     font-size: 16px;
     border-radius: 5px;
     box-shadow: 1px 1px 2px goldenrod;
+  }
+  .tasks{
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    gap: 18px;
+  }
+  #firstimg{
+    position: relative;
+  }
+  #secondimg{
+    position: absolute;
+    z-index: 2;
+    left: -25px;
+  }
+  .tasks{
+    padding:10px;
   }

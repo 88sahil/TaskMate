@@ -7,6 +7,7 @@ import './Menu.css'
 import { Condate } from "./HomeOver";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import TaskCard from "./TaskCard";
 const ProjectPage=()=>{
     const navigate = useNavigate()
     const {handleSubmit,register} = useForm()
@@ -16,6 +17,7 @@ const ProjectPage=()=>{
     const [fuser,setfuser] = useState(null)
     const {projectid} = useParams()
     const [project,setproject] = useState(null)
+    const [showtaskform,setshowtaskform] = useState(false)
     let date = Condate(Date.now())
     const api = axios.create({
         withCreadials:true
@@ -75,9 +77,14 @@ const ProjectPage=()=>{
         })
     }
     const addtask = (data)=>{
-        console.log(data)
+        api.post(`/api/projects/${projectid}/task`,data).then((res)=>{
+            FindProject()
+            setshowtaskform(false)
+        }).catch((err)=>{
+            console.log(err.response)
+            alert('error💀')
+        })
     }
-    console.log(new Date("2024-02-03T18:14"))
     useEffect(()=>{
         FindProject()
     },[])
@@ -151,11 +158,48 @@ const ProjectPage=()=>{
             </div> 
                         {/* //TODO - taks block starts here */}
                         <div className="taskblock">
-                            <button>AddTask<ArrowCircleDownIcon/></button>
-                            <form onSubmit={handleSubmit(addtask)}>
-                                <input type="datetime-local" {...register("from")} min={Date.now()} max={project.DueDate}required/>
-                                <button>submit</button>
-                            </form>
+                            <button onClick={()=>setshowtaskform(prev=>!prev)}>AddTask<ArrowCircleDownIcon/></button>
+                            {showtaskform &&<form className="projectform" onSubmit={handleSubmit(addtask)}>
+                                <div className="frm1">
+                                    <label htmlFor="projectname">TaskName:</label>
+                                    <input type="text" name="projectname" placeholder="eg.,TaskMate" {...register("name",{required:true})} required></input>
+                                </div>
+                                <div className="frm1">
+                                    <label htmlFor="Discription">Discription:</label>
+                                    <textarea name="Discription" placeholder="eg.,TaskMate is my fist project" rows="5" {...register("discription")}></textarea>
+                                </div>
+                                <div className="frm1">
+                                    <label htmlFor="from" >from:</label>
+                                    <input type="Datetime-local" name="from" {...register("from")} required></input>
+                                </div>
+                                <div className="frm1">
+                                    <label htmlFor="to" >to:</label>
+                                    <input type="Datetime-local" name="to" {...register("to")} required></input>
+                                </div>
+                                <div className="frm1">
+                                    <label htmlFor="progress">progress:</label>
+                                    <select className="priority" name="progress" {...register("progress")}>
+                                        <option value="created" selected>created</option>
+                                        <option value="in progress">in progress</option>
+                                        <option value="completed">Most</option>
+                                    </select>
+                                </div>
+                                <div className="formbuttons">
+                                    <button type="submit">Save</button>
+                                    <button onClick={()=>setshowtaskform(false)}>Cancel</button>
+                                </div>
+                         </form>}
+                        </div>
+                        <div>
+                            {/* //TODO - tasks apear here */}
+                                <div className="tasks bg-green-400">
+                                    {
+                                        project.task.map((ele)=>(
+                                            <TaskCard task={ele}/>
+                                        ))
+                                    }
+                                </div>
+                            
                         </div>
             </>
         ):(

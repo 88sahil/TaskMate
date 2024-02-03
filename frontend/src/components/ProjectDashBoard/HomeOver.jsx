@@ -52,7 +52,7 @@ const HomeOver =()=>{
                 <a><CalendarMonthIcon/>{Condate(Date.now())}</a>
             </div>
             <div className="PoMain">
-                <button onClick={()=>setshowform((prev)=>!prev)}>AddProject <AddCircleIcon sx={{color:"white"}}/></button>
+                <button onClick={()=>setshowform((prev)=>!prev,setLoader(false))}>AddProject <AddCircleIcon sx={{color:"white"}}/></button>
                 {showform && <form className="projectform" onSubmit={handleSubmit(createProject)}>
                     <div className="frm1">
                         <label htmlFor="projectname">ProjectName:</label>
@@ -81,7 +81,7 @@ const HomeOver =()=>{
                 </form>}
                 <div className="projectdata">
                     { Projects.length>0? 
-                        Projects.map((ele,index)=>{
+                        Projects.slice(0,4).map((ele,index)=>{
                              return(
                                     <ProjectCard ele={ele} index={index}/>
                              )

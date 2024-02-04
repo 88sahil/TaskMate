@@ -22,7 +22,7 @@ const ProjectOverview =()=>{
                 {project.length>0? 
                     project.map((ele)=>(<ProjectCard ele={ele}/>))
                 :(
-                    <div>Hello</div>
+                    <div className="loader"></div>
                 )} 
             </div>
             {loader && <div className="loader"></div>}

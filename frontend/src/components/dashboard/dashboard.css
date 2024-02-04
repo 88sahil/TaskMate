@@ -22,7 +22,7 @@
     display: flex;
     width: 100%;
     padding: 25px 40px;
-    justify-content: start;
+    justify-content:flex-start;
     align-items: center;
     color: black;
     text-decoration: none;
@@ -157,4 +157,29 @@
 
   .logonav{
     text-decoration: none;
+  }
+
+.userhead{
+    display: none;
+}
+  @media screen and (max-width:540px) {
+    .dash-1{
+        display: none;
+    }
+    .dash-main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .userhead{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+    .viewnav{
+        position: absolute;
+        left: 0;
+    }
+    
   }

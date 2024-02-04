@@ -7,11 +7,20 @@ import user from '../../assets/image/user.png'
 import cp from '../../assets/image/password.png'
 import uu  from '../../assets/image/update.png'
 import {useSelector} from 'react-redux'
+import SegmentIcon from '@mui/icons-material/Segment';
 const DashBoard = ()=>{
     let User =  useSelector((state)=>state.auth.UserData) 
+    let navdiv = document.getElementsByClassName('dash-1')[0]
+    const viewdiv =()=>{
+        navdiv.classList.toggle('viewnav')
+    }
     const navigate = useNavigate()
     return(
         <div className="dash-main">
+            <div className="userhead">
+                <a className="navicon p-4"><SegmentIcon onClick={viewdiv} sx={{fontSize:45}}/></a>
+                <Logo/>
+            </div>
             <div className="dash-1">
                     <NavLink to='/Home/overview' className='logonav'>
                         <div className="logo">

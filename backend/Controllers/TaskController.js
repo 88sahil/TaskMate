@@ -61,5 +61,15 @@ const getTasks = checkasync(async(req,res,next)=>{
         tasks
     })
 })
+const updateProgress = checkasync(async(req,res,next)=>{
+        const id = req.params.id
 
-module.exports = {createTask,addTaskTeam,deleteTaks,getTasks,GETtask}
+        const task = await Tasks.findByIdAndUpdate(id,req.body,{new:true})
+        if(!task){
+            return next(new AppError('please provid valid data',500))
+        }
+        res.status(200).json({
+            status:'success'
+        })
+})
+module.exports = {createTask,addTaskTeam,deleteTaks,getTasks,GETtask,updateProgress}

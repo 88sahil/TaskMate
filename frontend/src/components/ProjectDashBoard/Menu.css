@@ -565,3 +565,20 @@ section{
     color: gray;
     font-weight: bolder;
   }
+  .tbuttons{
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 10px;
+  }
+  .tbuttons>button{
+    padding:8px 15px;
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    color:white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px goldenrod;
+  }

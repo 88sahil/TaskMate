@@ -181,7 +181,7 @@ const ProjectPage=()=>{
                                     <select className="priority" name="progress" {...register("progress")}>
                                         <option value="created" selected>created</option>
                                         <option value="in progress">in progress</option>
-                                        <option value="completed">Most</option>
+                                        <option value="completed">Completed</option>
                                     </select>
                                 </div>
                                 <div className="formbuttons">
@@ -192,7 +192,7 @@ const ProjectPage=()=>{
                         </div>
                         <div>
                             {/* //TODO - tasks apear here */}
-                                <div className="tasks bg-green-400">
+                                <div className="tasks">
                                     {
                                         project.task.map((ele)=>(
                                             <TaskCard task={ele}/>

@@ -40,7 +40,7 @@ const DeleteProject = checkasync(async(req,res,next)=>{
     if(!deleteproject){
         return next(new AppError('cant delete project'),400)
     }  
-    const taks = await Tasks.findOneAndDelete({project:id})
+    const taks = await Tasks.deleteMany({project:id})
     //have to delete all tasks belong to this project after taskmodeling
     res.status(200).json({
         status:'success'

@@ -550,8 +550,18 @@ section{
   #secondimg{
     position: absolute;
     z-index: 2;
+    top: 0;
     left: -25px;
   }
   .tasks{
     padding:10px;
+  }
+  .taskdetail{
+    margin: 10px;
+  }
+  .taskdetail>tr>th{
+    text-align: start;
+    width: 200px;
+    color: gray;
+    font-weight: bolder;
   }

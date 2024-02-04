@@ -7,10 +7,10 @@ const TaskCard = ({task})=>{
     let due = Condate(task.to)
     let today = Condate(Date.now())
     return(
-        <div className={`projectCard`} style={{background:`${due===today? "#D0F0C0":""}`}}>
+        <div className={`projectCard`} style={{background:`${ task.progress ==="completed"? "rgb(251,206,177)":"" || due===today? "#D0F0C0":""}`}}>
            <div className="card-1">
             <a className="">{due}</a>
-            <NavLink className="go" to=""><MovingOutlinedIcon sx={{color:"black"}}/></NavLink>
+            <NavLink className="go" to={`/Home/Task/${task._id}`}><MovingOutlinedIcon sx={{color:"black"}}/></NavLink>
            </div>
            <h1>{task.name}</h1>
             <div className="last">

@@ -15,6 +15,17 @@ const createTask = checkasync(async(req,res,next)=>{
         task
     })
 })
+const GETtask = checkasync(async(req,res,next)=>{
+    const id = req.params.id
+    const task = await Tasks.findById(id)
+    if(!task){
+        return next(new AppError('no task found',404))
+    }
+    res.status(200).json({
+        status:'success',
+        task
+    })
+})
 const deleteTaks = checkasync(async(req,res,next)=>{
     const id = req.params.id
     const task = await Tasks.findByIdAndDelete(id)
@@ -51,4 +62,4 @@ const getTasks = checkasync(async(req,res,next)=>{
     })
 })
 
-module.exports = {createTask,addTaskTeam,deleteTaks,getTasks}
+module.exports = {createTask,addTaskTeam,deleteTaks,getTasks,GETtask}

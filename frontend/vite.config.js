@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server:{
     proxy:{
-      '/api':'https://task-mate-api.vercel.app/'
+      '/api':'https://taskmate-8wpz.onrender.com'
     }
   }
 })

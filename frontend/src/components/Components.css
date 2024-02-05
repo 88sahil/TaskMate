@@ -175,3 +175,24 @@
 .resetform{
     box-shadow: 1px 1px rgb(229, 229, 229),-1px -1px rgb(229, 229, 229);
 }
+.loginLogo{
+    display: none;
+}
+.authnav{
+    display: none;
+}
+ @media screen and (max-width:600px) {
+    .div1{
+        display: none;
+    }
+    .loginLogo{
+        display: block;
+    }
+    .main{
+        width: 90%;
+        align-items: center;
+    }
+    .authnav{
+        display: flex;
+    }
+ }

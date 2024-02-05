@@ -169,8 +169,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: medium
-    ;
+    font-size: medium;
 }
 .PoMain{
     width: 100%;
@@ -604,7 +603,7 @@ section{
       z-index: 5000;
     }
     .projectCard{
-      flex-grow:1;
+      flex-grow: .3;
     }
     .viewnav{
       display: flex;
@@ -621,5 +620,33 @@ section{
     }
     .projectform{
       left: 8%;
+    }
+
+    .projectdata{
+      display: flex;
+      justify-content:center;
+      padding-right: 10px;
+    }
+    .PoMain{
+      padding: 0;
+      padding-left: 10px;
+
+    }
+
+    .outlet{
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .tasks{
+      justify-content: center;
+    }
+    .FindUser{
+      left: 10%;
+      top: 20%;
+      background-color: #ecbe73;
+    }
+    .loader{
+      left: 30%;
     }
   }

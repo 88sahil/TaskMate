@@ -15,7 +15,7 @@ const Login = () =>{
         const api = axios.create({
             withCredentials:true
         })
-        const url = 'http://localhost:3000/api/user/login'
+        const url = '/api/user/login'
         api.post(url,data).then((res)=>{
             dispatch(login(res.data.user))
             navigate('/Home/overview')
@@ -38,6 +38,9 @@ const Login = () =>{
             </div>
         </div>
          <form onSubmit={handleSubmit(LoginUser)} className="signup-form">
+            <div className="loginLogo">
+                <Logo/>
+            </div>
             <h3>Login User</h3>
            <div className="su-div1">
             <label htmlFor="email">Email:</label>
@@ -52,6 +55,7 @@ const Login = () =>{
             })}/>
             </div>
             <button type="submit">Login</button>
+            <span className="authnav">New User? <Link to="/signup" className="font-bold text-blue-700">Signup</Link></span>
             <Link to="/forgotPassword"><a>Forgot Password?</a></Link>
        </form>
         </div>

@@ -114,7 +114,7 @@ const ProjectPage=()=>{
                     </tr>
                     <tr className="Tagsrow">
                         <th>Tags</th>
-                        <td id="Tags">{
+                        <td id="Tags" className="flex flex-wrap flex-1">{
                             project.tags.length>0?(project.tags.map((ele,index)=>(
                                 <a key={index}>{ele}<button onClick={()=>DeleteTag(ele)}>x</button></a>
                             ))):(
@@ -130,7 +130,7 @@ const ProjectPage=()=>{
                     </tr>
                     <tr className="teams">
                         <th>Team</th>
-                        <td id="Team">{project.team.length>0?(
+                        <td id="Team" className="flex flex-wrap flex-1">{project.team.length>0?(
                                         project.team.slice(0, 2).map((member, i) => (
                                             <div key={i} className="team">
                                                 <img src={member.photo} alt={member.name} />
@@ -192,7 +192,7 @@ const ProjectPage=()=>{
                         </div>
                         <div>
                             {/* //TODO - tasks apear here */}
-                                <div className="tasks">
+                                <div className="tasks flex">
                                     {
                                         project.task.map((ele)=>(
                                             <TaskCard task={ele}/>

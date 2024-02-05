@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "./Menu";
 import './Menu.css'
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import SegmentIcon from '@mui/icons-material/Segment';
 import Logo from "../Logo/Logo";
 
 const MainPage=()=>{
-    let navdiv = document.getElementsByClassName("mainnav")[0]
+    let navdiv;
+    useEffect(()=>{
+        navdiv = document.getElementsByClassName("mainnav")[0]
+    })
     const viewnav=()=>{
         navdiv.classList.toggle('viewnav')
     }

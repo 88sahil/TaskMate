@@ -1,10 +1,10 @@
 import React from "react";
 import Resetpass from "../../components/resetpass";
-const passwordReset=()=>{
+const PasswordReset=()=>{
     return(
         <div>
             <Resetpass/>
         </div>
     )
 }
-export default passwordReset
+export default PasswordReset

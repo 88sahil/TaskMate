@@ -1,5 +1,5 @@
 import React from "react";
-import Resetpass from "../../components/resetpass";
+import Resetpass from "../../components/Resetpass";
 const PasswordReset=()=>{
     return(
         <div>

@@ -5,7 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
     "start": "node server.js"
+=======
+    "start": "nodemon server.js",
+    "build":"npm install"
+>>>>>>> df7cadd7146f31a7bd2eeb530915a795024f365d
   },
   "author": "",
   "license": "ISC",

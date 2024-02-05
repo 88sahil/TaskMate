@@ -17,7 +17,7 @@ const UpdateUser =()=>{
         const image = {
             "avatar":data.avatar[0]
         }
-        api.post('http://localhost:3000/upload',image,{
+        api.post('/api/upload',image,{
             headers:{
                 'Content-Type':'multipart/form-data'
             }

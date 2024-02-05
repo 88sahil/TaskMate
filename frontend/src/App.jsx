@@ -11,7 +11,7 @@ function App() {
     withCredentials:true
   })
   const getUser =()=>{
-    api.get('http://localhost:3000/api/user/verify').then((res)=>{
+    api.get('/api/user/verify').then((res)=>{
      dispatch(login(res.data.user))
      navigate('/Home/overview')
     }).catch((err)=>{

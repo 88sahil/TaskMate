@@ -1,4 +1,4 @@
-const express = require('express')
+ const express = require('express')
 const App = express()
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
@@ -30,7 +30,7 @@ App.use('/api/user',User)
 App.use('/api/projects',project)
 App.use('/api/tasks',TaskR)
 App.use('/',router)    
-App.get('/Logout',(req,res,next)=>{
+App.get('/api/Logout',(req,res,next)=>{
     try{
         const cookieOption = {
             expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),

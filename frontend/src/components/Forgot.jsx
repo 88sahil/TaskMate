@@ -9,7 +9,7 @@ const Forgot=()=>{
         withCredentials:true
     })
     const getresettoken=(data)=>{
-            api.post('http://localhost:3000/api/user/forgotpass',data).then((res)=>{
+            api.post('/api/user/forgotpass',data).then((res)=>{
                     alert('check mail link sent successfully')
             }).catch((err)=>{
                 alert(err.data.message)

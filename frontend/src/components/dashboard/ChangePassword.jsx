@@ -9,7 +9,7 @@ const ChangePassword =()=>{
         withCredentials:true
     })
     const changepass=(data)=>{
-        api.patch('http://localhost:3000/api/user/updatepass',data).then((res)=>{
+        api.patch('/api/user/updatepass',data).then((res)=>{
             alert('password changed successFully')
         }).catch((err)=>{
             alert('sorry some error occurs')

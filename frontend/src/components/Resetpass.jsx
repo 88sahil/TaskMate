@@ -11,7 +11,7 @@ const Resetpass = ()=>{
         withCredentials:true
     })
     const resetpass = (data)=>{
-        api.patch(`http://localhost:3000/api/user/resetpass/${token}`,data).then((res)=>{
+        api.patch(`/api/user/resetpass/${token}`,data).then((res)=>{
             alert('passoword change successfully.please login')
             navigate('/login')
         }).catch((err)=>{

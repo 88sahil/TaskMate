@@ -21,7 +21,7 @@ const Menu =()=>{
             withCredentials:true
         })
         const Logout=()=>{
-                 api.get('http://localhost:3000/Logout').then((res)=>{
+                 api.get('/api/Logout').then((res)=>{
                     dispatch(logout())
                     alert('logged out!')
                     navigate('/login')

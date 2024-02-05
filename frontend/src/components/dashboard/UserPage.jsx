@@ -12,7 +12,7 @@ const UserPage = ()=>{
         withCredentials:true
     })
     const logout=()=>{
-            api.get('http://localhost:3000/Logout').then((res)=>{
+            api.get('/api/Logout').then((res)=>{
             dispatch(Logout())
             alert('logged out!')
             navigate('/login')

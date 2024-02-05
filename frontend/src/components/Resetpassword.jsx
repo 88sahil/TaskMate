@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import './Components.css'
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-const Resetpass = ()=>{
+const Resetpassword = ()=>{
     const {handleSubmit,register} = useForm()
     const navigate = useNavigate()
     const {token} = useParams()
@@ -39,4 +39,4 @@ const Resetpass = ()=>{
         </div>
     )
 }
-export default Resetpass
+export default Resetpassword

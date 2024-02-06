@@ -198,7 +198,7 @@ const logout =(req,res,next)=>{
             secure:true,
             sameSite:"none"
          } 
-        res.clearCookie("jwt")
+        res.Cookie("jwt","",cookieOption)
         req.user = null
         res.status(200).json({
             status:'success',

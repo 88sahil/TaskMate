@@ -9,10 +9,10 @@ const UserPage = ()=>{
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const api = axios.create({
-        withCredentials:true
+        withCredentials:false
     })
     const logout=()=>{
-            api.get('https://taskmate-8wpz.onrender.com/api/Logout').then((res)=>{
+            api.get('https://taskmate-8wpz.onrender.com/api/user/logout').then((res)=>{
             dispatch(Logout())
             alert('logged out!')
             navigate('/login')

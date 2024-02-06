@@ -65,7 +65,7 @@ const userLogin = checkasync(async(req,res,next)=>{
 const verifyUser =checkasync (async(req,res,next)=>{
        if(!req.user){
         let token = req.cookies.jwt
-        if(!token){
+        if(token.length===0){
             return next(new AppError('no token available',404))
         }
         //find user

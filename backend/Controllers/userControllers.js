@@ -62,9 +62,9 @@ const userLogin = checkasync(async(req,res,next)=>{
     }
     createsignIn(user,200,res)
 })
-const verifyUser =checkasync (async(req,res,next)=>{
+const verifyUser =checkasync(async(req,res,next)=>{
         if(!req.cookies.jwt){
-            return next(new AppError('please login',404))
+            return next(new AppError('please login',500))
         } // //find user
         const decoded = await promisify(jwt.verify)(req.cookies.jwt,process.env.token_secret)
         if(!decoded){

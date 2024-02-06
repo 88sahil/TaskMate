@@ -10,20 +10,22 @@ function App() {
   const api = axios.create({
     withCredentials:true
   })
-  useEffect(()=>{
-    try{
-      api.get('https://taskmate-8wpz.onrender.com/api/user/verify').then((res)=>{
-        console.log(res)
-        dispatch(login(res.data.user))
-        navigate('/Home/overview')
-      }).catch((err)=>{
-        console.log(err)
+  const getuser =async()=>{
+      try{
+        const res =await axios.get("https://taskmate-8wpz.onrender.com/api/user/verify",{withCredentials:true})
+        if(res.data){
+          console.log(res.data)
           navigate('/login')
-      })
-    }catch(err){
-      navigate('/login')
-    }
-      
+        }else{
+          navigate('/login')
+        }
+      }catch(err){
+        console.error(err)
+        navigate('/login')
+      }
+  }
+  useEffect(()=>{
+      getuser()
   },[])
   return (
     <>

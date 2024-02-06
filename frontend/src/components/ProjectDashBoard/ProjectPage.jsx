@@ -81,7 +81,7 @@ const ProjectPage=()=>{
         console.log(data)
         setLoader(true)
         api.post(`https://taskmate-8wpz.onrender.com/api/projects/${projectid}/task`,data).then((res)=>{
-            setLoader(false)
+            console.log(res)
             FindProject()
             setshowtaskform(false)
         }).catch((err)=>{

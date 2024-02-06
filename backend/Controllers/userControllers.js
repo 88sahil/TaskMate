@@ -63,9 +63,8 @@ const userLogin = checkasync(async(req,res,next)=>{
     createsignIn(user,200,res)
 })
 const verifyUser =checkasync (async(req,res,next)=>{
-       if(!req.user){
         let token = req.cookies.jwt
-        if(token.length===0){
+        if(!token){
             return next(new AppError('no token available',404))
         }
         //find user
@@ -87,13 +86,7 @@ const verifyUser =checkasync (async(req,res,next)=>{
             status:'success',
             user:user
         })
-       }else{
-        res.status(200).json({
-            status:'success',
-            user:req.user
-        })
-       }
-})
+       })
 const forgotpassword = checkasync(async(req,res,next)=>{
         const email = req.body.email
          if(!email){

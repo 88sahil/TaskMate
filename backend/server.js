@@ -13,7 +13,7 @@ const TaskR = require('./Routes/TaskRoute')
 App.use(express.json({max:'10kb'}))
 App.use(cors({
     credentials:true,
-    origin:"https://task-mates.netlify.app",
+    origin:"https://taskmates.netlify.app",
     optionsSuccessStatus:200
 }))
 App.use(cookieParser())

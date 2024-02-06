@@ -193,7 +193,7 @@ const changepass = checkasync( async(req,res,next)=>{
 const logout =(req,res,next)=>{
     try{
         const cookieOption = {
-            expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
+            expires:new Date(0),
             httpOnly:true,
             secure:true,
             sameSite:"none"

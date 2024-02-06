@@ -36,7 +36,9 @@ App.get('/api/Logout',(req,res,next)=>{
     try{
         const cookieOption = {
             expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
-            httpOnly:true
+            httpOnly:true,
+            secure:true,
+            sameSite:"none"
          } 
         res.cookie("jwt","",cookieOption)
         req.user = ""

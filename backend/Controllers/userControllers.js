@@ -69,7 +69,7 @@ const verifyUser =checkasync (async(req,res,next)=>{
         } // //find user
         const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
         if(!decoded){
-           return next(new AppError('Invalid Token',500))
+           return next(new AppError('Invalid Token',401))
         }
         const user =await User.findById(decoded.id);
         if(!user){
@@ -198,7 +198,6 @@ const logout =(req,res,next)=>{
          } 
         res.cookie("jwt","",cookieOption)
         req.user = null
-        res.redirect('/')
         res.status(200).json({
             status:'success',
             msg:'logged out'

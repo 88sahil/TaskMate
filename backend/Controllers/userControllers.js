@@ -26,7 +26,7 @@ const createsignIn =(user,statuscode,res)=>{
     const cookieOption = {
         expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
         httpOnly:true,
-        secure:true,
+        secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
         sameSite:'none'
      } 
     res.cookie("jwt",token,cookieOption)
@@ -66,9 +66,21 @@ const verifyUser =checkasync (async(req,res,next)=>{
         if(!req.cookies.jwt){
             return next(new AppError('please login',404))
         } // //find user
-       res.status(200).json({
-            token:req.cookie.jwt
-       })
+        const decoded = await promisify(jwt.verify)(req.cookies.jwt,process.env.token_secret)
+        if(!decoded){
+            return next(new AppError('invalid token!',401))
+        }
+        const user = await User.findById(decoded.id)
+        if(!user){
+            return next(new AppError('user not found!',404))
+        }
+        if(user.changepassword(decoded.iap)){
+            return next('passowrd changed!',401)
+        }
+        res.status(200).json({
+            status:'success',
+            user:user
+        })
        })
 const forgotpassword = checkasync(async(req,res,next)=>{
         const email = req.body.email
@@ -176,12 +188,11 @@ const changepass = checkasync( async(req,res,next)=>{
 const logout =(req,res,next)=>{
     try{
         const cookieOption = {
-            expires:new Date(0),
+            expires:new Date(Date.now()*10*1000),
             httpOnly:true,
-            secure:true,
             sameSite:"none"
          } 
-        res.cookie("jwt","",cookieOption)
+        res.cookie("jwt","logedout",cookieOption)
         req.user = null
         res.status(200).json({
             status:'success',

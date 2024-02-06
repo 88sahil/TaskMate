@@ -62,36 +62,28 @@ const userLogin = checkasync(async(req,res,next)=>{
     }
     createsignIn(user,200,res)
 })
-const verifyUser =checkasync ((req,res,next)=>{
+const verifyUser =checkasync (async(req,res,next)=>{
         let token = req.cookies.jwt
         if(!token){
             return next(new AppError('please login',404))
+        } // //find user
+        const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
+        if(!decoded){
+           return next(new AppError('Invalid Token',500))
+        }
+        const user =await User.findById(decoded.id);
+        if(!user){
+            return next(new AppError('no user Found',404))
+        }
+        //password changeAt
+        const isChange = user.changepassword(decoded.iap)
+        if(isChange){
+            return next(new AppError('password changed',400))
         }
         res.status(200).json({
-            token
+            status:'success',
+            user:user
         })
-        // if(!token){
-        //     return next(new AppError('no token available',404))
-        // }
-        // //find user
-        // const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
-        // if(!decoded){
-        //    return next(new AppError('Invalid Token',500))
-        // }
-        // const user =await User.findById(decoded.id);
-        // if(!user){
-        //     return next(new AppError('no user Found',404))
-        // }
-        // //password changeAt
-        // const isChange = user.changepassword(decoded.iap)
-        // if(isChange){
-        //     return next(new AppError('password changed',400))
-        // }
-
-        // res.status(200).json({
-        //     status:'success',
-        //     user:user
-        // })
        })
 const forgotpassword = checkasync(async(req,res,next)=>{
         const email = req.body.email

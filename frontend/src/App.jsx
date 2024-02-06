@@ -11,8 +11,7 @@ function App() {
     withCredentials:true
   })
   useEffect(()=>{
-      let url ='https://taskmate-8wpz.onrender.com/api/user/verify'
-      axios.get(url,{withCredentials:true}).then((res)=>{
+      api.get('https://taskmate-8wpz.onrender.com/api/user/verify').then((res)=>{
       console.log(res)
       dispatch(login(res.data.user))
       navigate('/Home/overview')

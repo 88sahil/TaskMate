@@ -18,7 +18,7 @@ const ProjectOverview =()=>{
     },[])
     return(
         <div>
-            <div className="po">
+            <div className="po flex flex-wrap gap-4">
                 {project.length>0? 
                     project.map((ele)=>(<ProjectCard ele={ele}/>))
                 :(

@@ -13,8 +13,13 @@ function App() {
   const getUser =()=>{
     let url ='https://taskmate-8wpz.onrender.com/api/user/verify'
     api.get(url).then((res)=>{
-     dispatch(login(res.data.user))
-     navigate('/Home/overview')
+      if(res.data.user){
+        dispatch(login(res.data.user))
+        navigate('/Home/overview')
+      }else{
+        navigate('/login')
+      }
+      
     }).catch((err)=>{
       console.log(err)
         navigate('/login')

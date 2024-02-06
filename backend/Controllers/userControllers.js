@@ -147,7 +147,7 @@ const protected = checkasync(async(req,res,next)=>{
         if(req.cookies.jwt){
             token = req.cookies.jwt
         }
-        if(!token){
+        if(token.length===0){
             return next(new AppError('please Login',500))
         }
         //find user

@@ -77,15 +77,10 @@ const ProjectPage=()=>{
         })
     }
     const addtask = (data)=>{
-        console.log("hello")
-        console.log(data)
-        setLoader(true)
-        api.post(`https://taskmate-8wpz.onrender.com/api/projects/${projectid}/task`,data).then((res)=>{
-            console.log(res)
-            FindProject()
-            setshowtaskform(false)
+        api.post(`https://taskmate-8wpz.onrender.com/api/projects/${projectid}/task`).then((res)=>{
+            console.log(res.data)
         }).catch((err)=>{
-            alert('error💀')
+            console.log(err)
         })
     }
     useEffect(()=>{

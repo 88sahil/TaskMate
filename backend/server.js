@@ -10,10 +10,7 @@ const GlobalErrorHandle = require('./Utils/GlobalErrorHanlde')
 const project = require('./Routes/projectRoute')
 const TaskR = require('./Routes/TaskRoute')
 App.use(express.json({max:'10kb'}))
-App.use(cors({
- credentials:true,
- origin:"https://task-mate-kad3ap9fs-88sahils-projects.vercel.app"
-}))
+App.use(cors())
 App.use(cookieParser())
 //start
 dotenv.config({path:'./config.env'})

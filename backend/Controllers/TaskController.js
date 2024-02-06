@@ -50,13 +50,16 @@ const addTaskTeam = checkasync(async(req,res,next)=>{
 })
 
 const getTasks = checkasync(async(req,res,next)=>{
-    const tasks = await Tasks.find()
+    const id = req.user._id
+
+    const tasks = await Tasks.find({$or:[{author:id},{team:{$in:[id]}}]})
     if(!tasks){
         return next(new AppError('no tasks found!',404))
     }
     res.status(200).json({
         status:'success',
-        tasks
+        tasks,
+        user:req.user
     })
 })
 const updateProgress = checkasync(async(req,res,next)=>{

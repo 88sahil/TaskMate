@@ -25,7 +25,7 @@ const HomeOver =()=>{
     //get all project for user
     const getProjects =()=>{
         setLoader(true)
-        api.get('https://taskmate-8wpz.onrender.com/api/projects').then((res)=>{
+        api.get('/api/projects').then((res)=>{
             setProjects(res.data.projects)
             setLoader(false)
         }).catch((err)=>{

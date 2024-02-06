@@ -7,6 +7,7 @@ import {useDispatch} from 'react-redux'
 import './Components.css'
 import {login} from '../store/AuthSlice'
 const SignUp = () =>{
+    const [loader,setloader]= useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const api = axios.create({
@@ -16,13 +17,16 @@ const SignUp = () =>{
     const [error,seterror] = useState('')
 
     const RegisterUser =(data)=>{
+        setloader(true)
         const url = "https://taskmate-8wpz.onrender.com/api/user/signup"
         api.post(url,data).then((res)=>{
             alert('user created successfully')
+            setloader(false)
             dispatch(login(res.data.user))
             navigate('/Home/overview')
             
         }).catch((err)=>{
+            setloader(false)
             seterror(err.response.data.message)
         })
         
@@ -73,6 +77,7 @@ const SignUp = () =>{
             <p className="w-10/12 text-red-500">{error}</p>
        </form>
         </div>
+        {loader && <div className="loader"></div>}
       </div>
 
     )

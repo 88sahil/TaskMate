@@ -7,20 +7,24 @@ import {useNavigate,Link} from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { login } from "../store/AuthSlice";
 const Login = () =>{
+    const [loader,setloader] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [message,setmessage] = useState('')
     const {handleSubmit,register} = useForm()
     const LoginUser = (data)=>{
+        setloader(false)
         const api = axios.create({
             withCredentials:true
         })
         const url = 'https://taskmate-8wpz.onrender.com/api/user/login'
         api.post(url,data).then((res)=>{
             dispatch(login(res.data.user))
+            setloader(false)
             navigate('/Home/overview')
         }).catch((err)=>{
             alert(err.response.data.message)
+            setloader(false)
         })
     }
     return(
@@ -59,7 +63,7 @@ const Login = () =>{
             <Link to="/forgotPassword"><a>Forgot Password?</a></Link>
        </form>
         </div>
-        {<div className="loader"></div>}
+        {loader && <div className="loader"></div>}
       </div>
     )
 }

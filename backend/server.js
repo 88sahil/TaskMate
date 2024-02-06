@@ -10,7 +10,10 @@ const GlobalErrorHandle = require('./Utils/GlobalErrorHanlde')
 const project = require('./Routes/projectRoute')
 const TaskR = require('./Routes/TaskRoute')
 App.use(express.json({max:'10kb'}))
-App.use(cors())
+App.use(cors({
+    credentials:true,
+    origin:"https://task-mates.netlify.app"
+}))
 App.use(cookieParser())
 //start
 dotenv.config({path:'./config.env'})

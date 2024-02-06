@@ -9,7 +9,7 @@ const ChangePassword =()=>{
         withCredentials:true
     })
     const changepass=(data)=>{
-        api.patch('/api/user/updatepass',data).then((res)=>{
+        api.patch('https://taskmate-8wpz.onrender.com/api/user/updatepass',data).then((res)=>{
             alert('password changed successFully')
         }).catch((err)=>{
             alert('sorry some error occurs')

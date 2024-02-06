@@ -17,7 +17,7 @@ const UpdateUser =()=>{
         const image = {
             "avatar":data.avatar[0]
         }
-        api.post('/api/upload',image,{
+        api.post('https://taskmate-8wpz.onrender.com/api/upload',image,{
             headers:{
                 'Content-Type':'multipart/form-data'
             }

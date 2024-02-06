@@ -9,10 +9,12 @@ const router = require('./service/photoupload')
 const GlobalErrorHandle = require('./Utils/GlobalErrorHanlde')
 const project = require('./Routes/projectRoute')
 const TaskR = require('./Routes/TaskRoute')
+
 App.use(express.json({max:'10kb'}))
 App.use(cors({
     credentials:true,
-    origin:"https://task-mates.netlify.app"
+    origin:"https://task-mates.netlify.app",
+    optionsSuccessStatus:200
 }))
 App.use(cookieParser())
 //start

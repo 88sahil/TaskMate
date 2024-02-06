@@ -16,7 +16,7 @@ const SignUp = () =>{
     const [error,seterror] = useState('')
 
     const RegisterUser =(data)=>{
-        const url = "/api/user/signup"
+        const url = "https://taskmate-8wpz.onrender.com/api/user/signup"
         api.post(url,data).then((res)=>{
             alert('user created successfully')
             dispatch(login(res.data.user))

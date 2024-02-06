@@ -11,7 +11,7 @@ const Resetpassword = ()=>{
         withCredentials:true
     })
     const resetpass = (data)=>{
-        api.patch(`/api/user/resetpass/${token}`,data).then((res)=>{
+        api.patch(`https://taskmate-8wpz.onrender.com/api/user/resetpass/${token}`,data).then((res)=>{
             alert('passoword change successfully.please login')
             navigate('/login')
         }).catch((err)=>{

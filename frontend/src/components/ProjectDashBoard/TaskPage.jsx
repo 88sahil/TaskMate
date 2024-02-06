@@ -23,19 +23,19 @@ const TaskPage = ()=>{
         withCredentials:true
     })
     const deleteTask =()=>{
-        api.delete(`/api/tasks/${taskid}`).then((res)=>{
+        api.delete(`https://taskmate-8wpz.onrender.com/api/tasks/${taskid}`).then((res)=>{
             navigate(`/Home/ProjectPage/${task.project}`)
         })
     }
     const findtask=()=>{
-        api.get(`/api/tasks/${taskid}`).then((res)=>{
+        api.get(`https://taskmate-8wpz.onrender.com/api/tasks/${taskid}`).then((res)=>{
             settask(res.data.task)
         }).catch((err)=>{
             console.log(err.response.data)
         })
     }
     const FindUser =(data)=>{
-        api.post('/api/user/finduser',data).then((res)=>{
+        api.post('https://taskmate-8wpz.onrender.com/api/user/finduser',data).then((res)=>{
             setfuser(res.data.user)
         }).catch((err)=>{
             console.log(err)
@@ -43,7 +43,7 @@ const TaskPage = ()=>{
     }
     const Adduser =(id)=>{
         const data = {userId:id}
-        api.patch(`/api/tasks/addTaskTeam/${taskid}`,data).then((res)=>{
+        api.patch(`https://taskmate-8wpz.onrender.com/api/tasks/addTaskTeam/${taskid}`,data).then((res)=>{
             setshowuform(false)
             setfuser(null)
             findtask()
@@ -53,7 +53,7 @@ const TaskPage = ()=>{
     }
     const updateProgress = (data)=>{
         setloader(true)
-        api.patch(`/api/tasks/${taskid}`,data).then((res)=>{
+        api.patch(`https://taskmate-8wpz.onrender.com/api/tasks/${taskid}`,data).then((res)=>{
             findtask()
             setloader(false)
         }).catch((err)=>{

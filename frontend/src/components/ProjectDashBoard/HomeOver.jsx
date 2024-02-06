@@ -25,7 +25,7 @@ const HomeOver =()=>{
     //get all project for user
     const getProjects =()=>{
         setLoader(true)
-        api.get('/api/projects').then((res)=>{
+        api.get('https://taskmate-8wpz.onrender.com/api/projects').then((res)=>{
             setProjects(res.data.projects)
             setLoader(false)
         }).catch((err)=>{
@@ -37,7 +37,7 @@ const HomeOver =()=>{
     const createProject =(data)=>{
         setLoader(true)
         setshowform(false)
-        api.post('/api/projects/',data).then((res)=>{
+        api.post('https://taskmate-8wpz.onrender.com/api/projects/',data).then((res)=>{
             getProjects()
             setLoader(false)
         }).catch((err)=>{

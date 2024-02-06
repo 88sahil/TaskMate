@@ -12,7 +12,7 @@ const UserPage = ()=>{
         withCredentials:true
     })
     const logout=()=>{
-            api.get('/api/Logout').then((res)=>{
+            api.get('https://taskmate-8wpz.onrender.com/api/Logout').then((res)=>{
             dispatch(Logout())
             alert('logged out!')
             navigate('/login')

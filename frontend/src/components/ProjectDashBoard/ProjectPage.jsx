@@ -24,7 +24,7 @@ const ProjectPage=()=>{
     })
     //find project
     const FindProject =()=>{
-        api.get(`/api/projects/${projectid}`).then((res)=>{
+        api.get(`https://taskmate-8wpz.onrender.com/api/projects/${projectid}`).then((res)=>{
             setproject(res.data.project)
             setLoader(false)
         }).catch((err)=>{
@@ -33,7 +33,7 @@ const ProjectPage=()=>{
     }
     //add tag
     const Addtags =(data)=>{
-        api.patch(`/api/projects/addtag/${projectid}`,data).then((res)=>{
+        api.patch(`https://taskmate-8wpz.onrender.com/api/projects/addtag/${projectid}`,data).then((res)=>{
             setshowtag(false)
             FindProject()
         }).catch((err)=>{
@@ -43,7 +43,7 @@ const ProjectPage=()=>{
     //deletetag
     const DeleteTag = (name)=>{
         const data = {tag:name}
-        api.patch(`/api/projects/removetag/${projectid}`,data).then((res)=>{
+        api.patch(`https://taskmate-8wpz.onrender.com/api/projects/removetag/${projectid}`,data).then((res)=>{
             FindProject()
         }).catch((err)=>{
             alert('err💀')
@@ -51,7 +51,7 @@ const ProjectPage=()=>{
     }
     //find user
     const FindUser =(data)=>{
-        api.post('/api/user/finduser',data).then((res)=>{
+        api.post('https://taskmate-8wpz.onrender.com/api/user/finduser',data).then((res)=>{
             setfuser(res.data.user)
         }).catch((err)=>{
             console.log(err)
@@ -60,7 +60,7 @@ const ProjectPage=()=>{
     //ad user in project
     const Adduser =(id)=>{
         const data = {userId:id}
-        api.patch(`/api/projects/addteam/${projectid}`,data).then((res)=>{
+        api.patch(`https://taskmate-8wpz.onrender.com/api/projects/addteam/${projectid}`,data).then((res)=>{
             setshowuform(false)
             setfuser(null)
             FindProject()
@@ -70,14 +70,14 @@ const ProjectPage=()=>{
     }
     //deletepoject
     const deleteproject = ()=>{
-        api.delete(`/api/projects/${projectid}`).then((res)=>{
+        api.delete(`https://taskmate-8wpz.onrender.com/api/projects/${projectid}`).then((res)=>{
             navigate('/Home/overview')
         }).catch((err)=>{
             alert('error')
         })
     }
     const addtask = (data)=>{
-        api.post(`/api/projects/${projectid}/task`,data).then((res)=>{
+        api.post(`https://taskmate-8wpz.onrender.com/api/projects/${projectid}/task`,data).then((res)=>{
             FindProject()
             setshowtaskform(false)
         }).catch((err)=>{

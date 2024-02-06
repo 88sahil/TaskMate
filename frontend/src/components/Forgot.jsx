@@ -9,7 +9,7 @@ const Forgot=()=>{
         withCredentials:true
     })
     const getresettoken=(data)=>{
-            api.post('/api/user/forgotpass',data).then((res)=>{
+            api.post('https://taskmate-8wpz.onrender.com/api/user/forgotpass',data).then((res)=>{
                     alert('check mail link sent successfully')
             }).catch((err)=>{
                 alert(err.data.message)

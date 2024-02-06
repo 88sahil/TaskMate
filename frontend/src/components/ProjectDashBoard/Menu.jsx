@@ -21,7 +21,7 @@ const Menu =()=>{
             withCredentials:true
         })
         const Logout=()=>{
-                 api.get('/api/Logout').then((res)=>{
+                 api.get('https://taskmate-8wpz.onrender.com/api/Logout').then((res)=>{
                     dispatch(logout())
                     alert('logged out!')
                     navigate('/login')

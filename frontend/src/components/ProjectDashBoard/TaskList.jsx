@@ -7,7 +7,7 @@ const TaskList =()=>{
         withCredentials:true
     })
     const getTasks = ()=>{
-        api.get('/api/tasks').then((res)=>{
+        api.get('https://taskmate-8wpz.onrender.com/api/tasks').then((res)=>{
             settasks(res.data.tasks)
         }).catch((err)=>{
             console.log(err)

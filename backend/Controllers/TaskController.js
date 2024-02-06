@@ -50,9 +50,7 @@ const addTaskTeam = checkasync(async(req,res,next)=>{
 })
 
 const getTasks = checkasync(async(req,res,next)=>{
-    const id = req.user._id
-
-    const tasks = await Tasks.find({$or:[{author:id},{team:{$in:[id]}}]})
+    const tasks = await Tasks.find()
     if(!tasks){
         return next(new AppError('no tasks found!',404))
     }

@@ -26,7 +26,7 @@ const createsignIn =(user,statuscode,res)=>{
     const cookieOption = {
         expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
         httpOnly:true,
-        secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+        secure: true,
         sameSite:'none'
      } 
     res.cookie("jwt",token,cookieOption)
@@ -188,7 +188,7 @@ const changepass = checkasync( async(req,res,next)=>{
 const logout =(req,res,next)=>{
     try{
         const cookieOption = {
-            expires:new Date(Date.now()*10*1000),
+            expire:new Date(Date.now()*10*1000),
             httpOnly:true,
             sameSite:"none"
          } 

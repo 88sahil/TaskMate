@@ -11,14 +11,19 @@ function App() {
     withCredentials:true
   })
   useEffect(()=>{
-      api.get('https://taskmate-8wpz.onrender.com/api/user/verify').then((res)=>{
-      console.log(res)
-      dispatch(login(res.data.user))
-      navigate('/Home/overview')
-    }).catch((err)=>{
-      console.log(err)
-        navigate('/login')
-    })
+    try{
+      api.get('http://localhost:3000/api/user/verify').then((res)=>{
+        console.log(res)
+        dispatch(login(res.data.user))
+        navigate('/Home/overview')
+      }).catch((err)=>{
+        console.log(err)
+          navigate('/login')
+      })
+    }catch(err){
+      navigate('/login')
+    }
+      
   },[])
   return (
     <>

@@ -200,6 +200,7 @@ const logout =(req,res,next)=>{
          } 
         res.cookie("jwt","",cookieOption)
         req.user = null
+        res.redirect('/')
         res.status(200).json({
             status:'success',
             msg:'logged out'

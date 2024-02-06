@@ -78,12 +78,16 @@ const ProjectPage=()=>{
     }
     const AddTask=(data)=>{
         data.project = projectid,
+        setshowtaskform(false)
+        setLoader(true)
         axios.post('https://taskmate-8wpz.onrender.com/api/tasks',data,{
             withCredentials:true
         }).then((res)=>{
             FindProject()
+            setLoader(false)
         }).catch((err)=>{
             alert(err.response.data.message)
+            setLoader(false)
         })
     }
     useEffect(()=>{

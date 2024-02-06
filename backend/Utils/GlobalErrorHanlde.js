@@ -8,9 +8,7 @@ const handleDev = (err,res)=>{
 const GlobalErrorHandle = (err,req,res,next)=>{
     err.statuscode = err.statusCode || 400
     err.status = err.status || "fail"
-    if(process.env.NODE_ENV==="development"){
-        handleDev(err,res)
-    }
+    handleDev(err,res)
 }
 
 module.exports = GlobalErrorHandle

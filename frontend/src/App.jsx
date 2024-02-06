@@ -17,6 +17,7 @@ function App() {
           console.log(res.data)
           navigate('/login')
         }else{
+          console.log()
           navigate('/login')
         }
       }catch(err){

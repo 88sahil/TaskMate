@@ -37,7 +37,7 @@ const HomeOver =()=>{
     const createProject =(data)=>{
         setLoader(true)
         setshowform(false)
-        api.post('https://taskmate-8wpz.onrender.com/api/projects/',data).then((res)=>{
+        api.post('/api/projects/',data).then((res)=>{
             getProjects()
             setLoader(false)
         }).catch((err)=>{

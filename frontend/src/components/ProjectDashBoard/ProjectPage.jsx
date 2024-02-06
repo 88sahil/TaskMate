@@ -206,6 +206,7 @@ const ProjectPage=()=>{
                                 </div>
                             
                         </div>
+                        { Loader && <div className="loader"></div>}
             </>
         ):(
             Loader && <div className="loader"></div>

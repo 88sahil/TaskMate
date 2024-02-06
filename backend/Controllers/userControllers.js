@@ -64,7 +64,7 @@ const userLogin = checkasync(async(req,res,next)=>{
 })
 const verifyUser =checkasync (async(req,res,next)=>{
         let token = req.cookies.jwt
-        if(!token){
+        if(token.length<1){
             return next(new AppError('please login',404))
         } // //find user
        res.status(200).json({

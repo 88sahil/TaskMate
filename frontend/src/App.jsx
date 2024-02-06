@@ -14,14 +14,12 @@ function App() {
       try{
         const res =await axios.get("https://taskmate-8wpz.onrender.com/api/user/verify",{withCredentials:true})
         if(res.data){
-          console.log(res.data)
-          navigate('/login')
+          dispatch(login(res.data.user))
+          navigate('/Home/overview')
         }else{
-          console.log()
           navigate('/login')
         }
       }catch(err){
-        console.error(err)
         navigate('/login')
       }
   }

@@ -187,13 +187,7 @@ const changepass = checkasync( async(req,res,next)=>{
    })
 const logout =(req,res,next)=>{
     try{
-        const cookieOption = {
-            expire:new Date(Date.now()*10*1000),
-            httpOnly:true,
-            sameSite:"none"
-         } 
-        res.cookie("jwt","logedout",cookieOption)
-        req.user = null
+        res.clearCookie("jwt",{path:'/login'})
         res.status(200).json({
             status:'success',
             msg:'logged out'

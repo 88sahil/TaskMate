@@ -76,12 +76,14 @@ const ProjectPage=()=>{
             alert('error')
         })
     }
-    const addtask = (data)=>{
-        data.project = projectid
-        api.post(`https://taskmate-8wpz.onrender.com/api/tasks`,data).then((res)=>{
-            console.log(res.data)
+    const AddTask=(data)=>{
+        data.project = projectid,
+        axios.post('https://taskmate-8wpz.onrender.com/api/tasks',data,{
+            withCredentials:true
+        }).then((res)=>{
+            FindProject()
         }).catch((err)=>{
-            console.log(err)
+            alert(err.response.data.message)
         })
     }
     useEffect(()=>{
@@ -158,7 +160,7 @@ const ProjectPage=()=>{
                         {/* //TODO - taks block starts here */}
                         <div className="taskblock">
                             <button onClick={()=>setshowtaskform(prev=>!prev)}>AddTask<ArrowCircleDownIcon/></button>
-                            {showtaskform &&<form className="projectform" onSubmit={handleSubmit(addtask)}>
+                            {showtaskform &&<form className="projectform" onSubmit={handleSubmit(AddTask)}>
                                 <div className="frm1">
                                     <label htmlFor="projectname">TaskName:</label>
                                     <input type="text" name="projectname" placeholder="eg.,TaskMate" {...register("name",{required:true})} required></input>
@@ -178,13 +180,13 @@ const ProjectPage=()=>{
                                 <div className="frm1">
                                     <label htmlFor="progress">progress:</label>
                                     <select className="priority" name="progress" {...register("progress")}>
-                                        <option value="created" selected>created</option>
+                                        <option value="created">created</option>
                                         <option value="in progress">in progress</option>
                                         <option value="completed">Completed</option>
                                     </select>
                                 </div>
                                 <div className="formbuttons">
-                                    <button type="submit" >Save</button>
+                                    <button type="submit">Save</button>
                                     <button onClick={()=>setshowtaskform(false)}>Cancel</button>
                                 </div>
                          </form>}

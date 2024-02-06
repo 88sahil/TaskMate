@@ -8,6 +8,7 @@ const TaskList =()=>{
     })
     const getTasks = ()=>{
         api.get('https://taskmate-8wpz.onrender.com/api/tasks').then((res)=>{
+            console.log(res.data.tasks)
             settasks(res.data.tasks)
         }).catch((err)=>{
             console.log(err)

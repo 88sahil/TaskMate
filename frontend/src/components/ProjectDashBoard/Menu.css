@@ -619,7 +619,8 @@ section{
       height: 100px;
     }
     .projectform{
-      left: 8%;
+      left: 5px;
+      background-color: rgba(204, 152, 56, 0.92);
     }
 
     .projectdata{
@@ -642,9 +643,10 @@ section{
       justify-content: center;
     }
     .FindUser{
-      left: 10%;
+      left: 0%;
+      width: 100%;
       top: 20%;
-      background-color: #ecbe73;
+      background-color: #ffb235;
     }
     .loader{
       left: 30%;

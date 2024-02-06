@@ -195,4 +195,7 @@
     .authnav{
         display: flex;
     }
+    .su-div1>input{
+        width: 270px;
+    }
  }

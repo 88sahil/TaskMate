@@ -186,7 +186,7 @@ const ProjectPage=()=>{
                                     </select>
                                 </div>
                                 <div className="formbuttons">
-                                    <button type="submit">Save</button>
+                                    <button type="submit" >Save</button>
                                     <button onClick={()=>setshowtaskform(false)}>Cancel</button>
                                 </div>
                          </form>}

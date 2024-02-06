@@ -9,7 +9,7 @@ const ProjectOverview =()=>{
     const [loader,setloader] = useState(true)
     let [project,setproject] = useState([]);
     useEffect(()=>{
-        api.get('frontend/vite.config.js/api/projects').then((res)=>{
+        api.get('https://taskmate-8wpz.onrender.com/api/projects').then((res)=>{
             setloader(false)
             setproject(res.data.projects)
         }).catch((err)=>{

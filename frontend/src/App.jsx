@@ -11,7 +11,7 @@ function App() {
     withCredentials:true
   })
   const getUser =()=>{
-    let url ='https://taskmate-8wpz.onrender.com/api/user/verify'
+    let url ='/api/user/verify'
     api.get(url).then((res)=>{
      dispatch(login(res.data.user))
      navigate('/Home/overview')

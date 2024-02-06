@@ -12,8 +12,9 @@ function App() {
   })
   const getUser =()=>{
     let url ='https://taskmate-8wpz.onrender.com/api/user/verify'
-    axios.get(url).then((res)=>{
+    api.get(url).then((res)=>{
      dispatch(login(res.data.user))
+     navigate('/Home/overview')
     }).catch((err)=>{
       console.log(err)
         navigate('/login')

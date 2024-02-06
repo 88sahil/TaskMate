@@ -40,8 +40,8 @@ App.get('/api/Logout',(req,res,next)=>{
             secure:true,
             sameSite:"none"
          } 
-        res.cookie("jwt","",cookieOption)
-        req.user = ""
+        res.clearCookie("jwt")
+        req.user = null
         res.status(200).json({
             status:'success',
             msg:'logged out'

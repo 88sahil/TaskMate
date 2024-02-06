@@ -67,7 +67,7 @@ const verifyUser =checkasync (async(req,res,next)=>{
             return next(new AppError('please login',404))
         } // //find user
        res.status(200).json({
-        token
+            token:req.cookie.jwt
        })
        })
 const forgotpassword = checkasync(async(req,res,next)=>{

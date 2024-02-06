@@ -12,7 +12,7 @@ function App() {
   })
   useEffect(()=>{
     try{
-      api.get('http://localhost:3000/api/user/verify').then((res)=>{
+      api.get('https://taskmate-8wpz.onrender.com/api/user/verify').then((res)=>{
         console.log(res)
         dispatch(login(res.data.user))
         navigate('/Home/overview')

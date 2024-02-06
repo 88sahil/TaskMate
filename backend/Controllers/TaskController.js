@@ -2,17 +2,14 @@ const {checkasync} = require('./userControllers')
 const AppError = require('../Utils/Error')
 const Tasks  = require('../Models/TaskModel')
 const createTask = checkasync(async(req,res,next)=>{
-    const {projectid} = req.params
     const task = await Tasks.create(req.body)
     if(!task){
         return next(new AppError("there is error to createtask",500))
     }
     task.author = req.user._id
-    task.project = projectid
     await task.save()
     res.status(201).json({
-        status:'success',
-        task
+        status:'success'
     })
 })
 const GETtask = checkasync(async(req,res,next)=>{

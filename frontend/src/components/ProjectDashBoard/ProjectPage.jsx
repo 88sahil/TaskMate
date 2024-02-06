@@ -77,7 +77,8 @@ const ProjectPage=()=>{
         })
     }
     const addtask = (data)=>{
-        api.post(`/api/projects/${projectid}/task`).then((res)=>{
+        data.project = projectid
+        api.post(`https://taskmate-8wpz.onrender.com/api/tasks`,data).then((res)=>{
             console.log(res.data)
         }).catch((err)=>{
             console.log(err)

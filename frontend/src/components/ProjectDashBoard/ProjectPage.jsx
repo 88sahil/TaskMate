@@ -77,11 +77,12 @@ const ProjectPage=()=>{
         })
     }
     const addtask = (data)=>{
+        setLoader(true)
         api.post(`https://taskmate-8wpz.onrender.com/api/projects/${projectid}/task`,data).then((res)=>{
+            setLoader(false)
             FindProject()
             setshowtaskform(false)
         }).catch((err)=>{
-            console.log(err.response)
             alert('error💀')
         })
     }

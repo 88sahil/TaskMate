@@ -26,7 +26,8 @@ const createsignIn =(user,statuscode,res)=>{
     const cookieOption = {
         expires:new Date(Date.now()+process.env.cookie_expires* 24*60*60*1000),
         httpOnly:true,
-        secure:true
+        secure:true,
+        sameSite:'none'
      } 
     res.cookie("jwt",token,cookieOption)
         res.status(statuscode).json({

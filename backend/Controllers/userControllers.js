@@ -67,23 +67,9 @@ const verifyUser =checkasync (async(req,res,next)=>{
         if(!token){
             return next(new AppError('please login',404))
         } // //find user
-        const decoded = await promisify(jwt.verify)(token,process.env.token_secret)
-        if(!decoded){
-           return next(new AppError('Invalid Token',401))
-        }
-        const user =await User.findById(decoded.id);
-        if(!user){
-            return next(new AppError('no user Found',404))
-        }
-        //password changeAt
-        const isChange = user.changepassword(decoded.iap)
-        if(isChange){
-            return next(new AppError('password changed',400))
-        }
-        res.status(200).json({
-            status:'success',
-            user:user
-        })
+       res.status(200).json({
+        token
+       })
        })
 const forgotpassword = checkasync(async(req,res,next)=>{
         const email = req.body.email

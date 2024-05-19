@@ -17,7 +17,7 @@ const DashBoard = ()=>{
         const handlereload=()=>{
             navigate('/')
         }
-         window.onbeforeunload = handleReload;
+         window.onbeforeunload = handlereload;
         return () => {
           window.onbeforeunload = null;
         };

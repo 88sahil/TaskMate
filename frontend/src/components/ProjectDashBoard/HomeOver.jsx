@@ -5,6 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {useForm} from 'react-hook-form'
 import axios from 'axios'
 import './Menu.css'
+import {useNavigate} from 'react-router-dom'
 import ProjectCard from "./ProjectCard";
 import Logo from "../Logo/Logo";
 export const Condate = (dates)=>{
@@ -13,6 +14,7 @@ export const Condate = (dates)=>{
     return date
 }
 const HomeOver =()=>{
+    const navigate = useNavigate()
     const {handleSubmit,register} = useForm()
     const [showform,setshowform] = useState(false)
     const [Loader,setLoader] = useState(false)
@@ -48,7 +50,8 @@ const HomeOver =()=>{
         getProjects()
     },[])
     return(
-        <div className="homeover">
+       user?(
+            <div className="homeover">
             <div className="hodiv1">
                 <a>Hello {user.name.split(' ')[0]}</a>
                 <a id="calendarmonth"><CalendarMonthIcon/>{Condate(Date.now())}</a>
@@ -95,6 +98,9 @@ const HomeOver =()=>{
                {Loader && <div className="loader"></div>}
             </div>
         </div>
+       ):(
+           navigate('/')
+       )
     )
 }
 export default HomeOver

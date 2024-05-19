@@ -12,7 +12,7 @@ const UserPage = ()=>{
         withCredentials:false
     })
     if(!user){
-        navigate('/DashBoard/user')
+        navigate('/')
     }
     const logout=()=>{
             api.get('https://taskmate-8wpz.onrender.com/api/user/logout').then((res)=>{

@@ -7,6 +7,7 @@ import './App.css'
 function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [fetched,setfetched] = useState(false)
   const api = axios.create({
     withCredentials:true
   })
@@ -15,6 +16,7 @@ function App() {
         const res =await axios.get("https://taskmate-8wpz.onrender.com/api/user/verify",{withCredentials:true})
         if(res.data){
           dispatch(login(res.data.user))
+          setfetched(true)
           navigate('/Home/overview')
         }else{
           navigate('/login')
@@ -28,7 +30,7 @@ function App() {
   },[])
   return (
     <>
-      <Outlet/>
+      {fetched?( <Outlet/>):(<div className="Loader"></div>)}
     </>
   )
   }

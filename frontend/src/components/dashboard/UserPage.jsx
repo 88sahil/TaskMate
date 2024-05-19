@@ -11,6 +11,9 @@ const UserPage = ()=>{
     const api = axios.create({
         withCredentials:false
     })
+    if(!user){
+        navigate('/DashBoard/user')
+    }
     const logout=()=>{
             api.get('https://taskmate-8wpz.onrender.com/api/user/logout').then((res)=>{
             dispatch(Logout())

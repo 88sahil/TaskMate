@@ -11,9 +11,7 @@ const UserPage = ()=>{
     const api = axios.create({
         withCredentials:false
     })
-    if(!user){
-        navigate('/')
-    }
+    
     const logout=()=>{
             api.get('https://taskmate-8wpz.onrender.com/api/user/logout').then((res)=>{
             dispatch(Logout())
@@ -24,17 +22,27 @@ const UserPage = ()=>{
             })
     }
     return(
-        <div className="userpage">
+        <div>
+            {
+                user? (
+                     <div className="userpage">
             <div>
-            <img src={user.photo}></img>
+            <img src={user?.photo}></img>
             </div>
             <div className="userpage1">
-                <p id="userName">{user.name}</p>
-                 <p id="email">{user.email}</p>
+                <p id="userName">{user?.name}</p>
+                 <p id="email">{user?.email}</p>
             </div>
         <div className="userpage">
         <button onClick={logout}>LogOut</button>
         </div>
+        </div>
+                ):(
+                    {
+                        navigate('/')
+                    }
+                )
+            }
         </div>
     )
 }

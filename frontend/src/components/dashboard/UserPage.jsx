@@ -38,9 +38,8 @@ const UserPage = ()=>{
         </div>
         </div>
                 ):(
-                    {
+                    
                         navigate('/')
-                    }
                 )
             }
         </div>

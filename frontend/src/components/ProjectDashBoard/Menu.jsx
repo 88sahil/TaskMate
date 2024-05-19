@@ -31,7 +31,9 @@ const Menu =()=>{
                 })
         }
     return(
-            <div className="main_menu">
+            {
+                    user? (
+                                        <div className="main_menu">
                     <Logo/>
                     <NavLink className="main_menu_user" to="/DashBoard/user">
                             <img src={user.photo} alt="profile" title={user.name} />
@@ -54,6 +56,10 @@ const Menu =()=>{
                         </div>
                     </div>
             </div>
+                    ):(
+                            navigate('/')
+                    )
+            }
     )
 }
 

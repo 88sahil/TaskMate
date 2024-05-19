@@ -27,11 +27,11 @@ const UserPage = ()=>{
                 user? (
                      <div className="userpage">
             <div>
-            <img src={user?.photo}></img>
+            <img src={user?.photo} alt="user"></img>
             </div>
             <div className="userpage1">
-                <p id="userName">{user?.name}</p>
-                 <p id="email">{user?.email}</p>
+                <p id="userName">{user?.name || 'name'}</p>
+                 <p id="email">{user?.email || 'xyz@domain.com'}</p>
             </div>
         <div className="userpage">
         <button onClick={logout}>LogOut</button>

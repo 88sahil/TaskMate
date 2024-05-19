@@ -31,7 +31,6 @@ const Menu =()=>{
                 })
         }
     return(
-            {
                     user? (
                                         <div className="main_menu">
                     <Logo/>
@@ -59,7 +58,6 @@ const Menu =()=>{
                     ):(
                             navigate('/')
                     )
-            }
     )
 }
 

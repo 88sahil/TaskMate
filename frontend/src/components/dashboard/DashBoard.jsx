@@ -10,14 +10,23 @@ import {useSelector} from 'react-redux'
 import SegmentIcon from '@mui/icons-material/Segment';
 const DashBoard = ()=>{
     let User =  useSelector((state)=>state.auth.UserData) 
+    const navigate = useNavigate()
     let navdiv;
     useEffect(()=>{
         navdiv = document.getElementsByClassName('dash-1')[0]
-    })
+        const handlereload=()=>{
+            navigate('/')
+        }
+         window.onbeforeunload = handleReload;
+        return () => {
+          window.onbeforeunload = null;
+        };
+    },[])
+        
     const viewdiv =()=>{
         navdiv.classList.toggle('viewnav')
     }
-    const navigate = useNavigate()
+   
     return(
         <div className="dash-main">
             <div className="userhead">

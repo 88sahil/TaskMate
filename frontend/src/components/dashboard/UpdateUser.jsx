@@ -32,7 +32,7 @@ const UpdateUser =()=>{
         })
     }
     return(
-        user> (
+        user? (
                     <div className="userpage">
         <div>
             <img src={user.photo}></img>

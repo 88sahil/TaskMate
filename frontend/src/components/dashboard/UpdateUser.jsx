@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import {useForm} from 'react-hook-form'
 import './dashboard.css'
 import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from 'react-router-dom'
 import axios from "axios";
 import { login } from "../../store/AuthSlice";
 const UpdateUser =()=>{
     const user = useSelector(state=>state.auth.UserData)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const {handleSubmit,register} = useForm()
     const api = axios.create({
         withCredentials:true
@@ -30,7 +32,8 @@ const UpdateUser =()=>{
         })
     }
     return(
-        <div className="userpage">
+        user> (
+                    <div className="userpage">
         <div>
             <img src={user.photo}></img>
         </div>
@@ -48,6 +51,7 @@ const UpdateUser =()=>{
         </form>
         {Loader && <div class="loader"></div>}
         </div>
+        ):(navigate('/'))
     )
 }
 export default UpdateUser

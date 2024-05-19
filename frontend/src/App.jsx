@@ -30,7 +30,7 @@ function App() {
   },[])
   return (
     <>
-      {fetched?( <Outlet/>):(<div className="Loader"></div>)}
+      {fetched?( <Outlet/>):(<div className="loader"></div>)}
     </>
   )
   }
